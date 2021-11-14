@@ -2,13 +2,13 @@
 <form  fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
 
 <mat-form-field>
-  <input ngModel matInput  placeholder="Login" type="email" />
+  <input ngModel matInput name="email" placeholder="Login" type="email" email />
     <mat-error >Invalid Email</mat-error>
     <mat-hint>Please provide your email as login</mat-hint>
 </mat-form-field>
 
 <mat-form-field>
-  <input required matInput placeholder="Password">
+  <input required matInput name="password" placeholder="Password"/>
   <mat-error >this is required field</mat-error>
 </mat-form-field>
 <button mat-raised-button color="primary">Register</button>
