@@ -1,0 +1,9 @@
+mat-form-field{
+  width: 300px;
+}
+
+.control{
+  width: 50%;
+  height: 80%;
+  border: 1px solid black;
+}
