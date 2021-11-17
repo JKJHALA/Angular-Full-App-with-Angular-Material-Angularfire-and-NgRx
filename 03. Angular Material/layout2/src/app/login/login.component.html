@@ -1,4 +1,8 @@
-<div class="control" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginFG">
+
+<div class="page"  fxLayout="column" fxLayoutAlign="center center" >
+
+<div class="control" fxFlexOffset="-20%" fxLayout="column" fxLayoutAlign="center center"  [formGroup]="loginFG">
+
 
   <mat-form-field>
     <input matInput placeholder="Login" formControlName="loginName">
@@ -15,12 +19,15 @@
         <div *ngIf="loginFG.get('password')?.errors?.['minlength']">
           <mat-error> min 6 char neede you keyed {{loginFG.get('password')?.value.length}} </mat-error>
          </div>
-
     </div>
+
+
 
   </mat-form-field>
 
 
   <button mat-raised-button color="primary">Login</button>
+
+</div>
 
 </div>

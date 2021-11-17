@@ -2,8 +2,13 @@ mat-form-field{
   width: 300px;
 }
 
+.page{
+  width: 100vw;
+  height: 100vh;
+
+}
+
 .control{
-  width: 50%;
-  height: 80%;
-  border: 1px solid black;
+padding: 10px;
+border: 1px solid black;
 }
