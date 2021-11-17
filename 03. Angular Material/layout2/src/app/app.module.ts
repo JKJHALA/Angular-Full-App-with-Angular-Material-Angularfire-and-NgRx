@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { TpageComponent } from './tpage/tpage.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     LoginComponent,
     SignupComponent,
     TopBarComponent,
-    SideBarComponent
+    SideBarComponent,
+    TpageComponent
   ],
   imports: [
     BrowserModule,
