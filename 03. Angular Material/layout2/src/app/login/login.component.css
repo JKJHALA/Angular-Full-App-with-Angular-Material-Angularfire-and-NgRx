@@ -2,11 +2,11 @@ mat-form-field{
   width: 300px;
 }
 
-.page{
-  width: 100vw;
-  height: 100vh;
+:host{
 
+  flex: 1 1 auto;
 }
+
 
 .control{
 padding: 10px;

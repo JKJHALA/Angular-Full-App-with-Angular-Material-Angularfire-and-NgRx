@@ -1,9 +1,13 @@
-<div fxLayout="column">
-  <app-top-bar></app-top-bar>
-  <div fxlayout fxLayout="row">
-    <app-side-bar></app-side-bar>
-    <router-outlet></router-outlet>
+
+<div fxLayout="column" fxFlex fxLayoutAlign="start stretch">
+  <app-top-bar fxFlex="0 0 0"></app-top-bar>
+  <div  fxLayout="row" fxFlex="1 1 auto"  fxLayoutAlign="start stretch" >
+    <app-side-bar  fxFlex=".1 0 0"></app-side-bar>
+    <!-- <app-login fxFlex></app-login> -->
+    <router-outlet fxFlex="0 0 auto" ></router-outlet>
 
   </div>
 
 </div>
+
+
