@@ -1,13 +1,22 @@
 
-<div fxLayout="column" fxFlex fxLayoutAlign="start stretch">
+<!-- <div fxLayout="column" fxFlex fxLayoutAlign="start stretch">
   <app-top-bar fxFlex="0 0 0"></app-top-bar>
   <div  fxLayout="row" fxFlex="1 1 auto"  fxLayoutAlign="start stretch" >
     <app-side-bar  fxFlex=".1 0 0"></app-side-bar>
-    <!-- <app-login fxFlex></app-login> -->
+
     <router-outlet fxFlex="0 0 auto" ></router-outlet>
 
   </div>
 
+</div> -->
+
+
+<div  gdAreas="header header   | sideLeft midPart "
+gdAlignRows="stretch stretch" gdAlignColumns="stratch stratch"
+gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
+  <app-top-bar gdArea="header"></app-top-bar>
+
+  <app-side-bar gdArea="sideLeft"></app-side-bar>
+  <div  gdArea="midPart" gdGridAlign="stratch stratch"  ><router-outlet></router-outlet></div>
+
 </div>
-
-
