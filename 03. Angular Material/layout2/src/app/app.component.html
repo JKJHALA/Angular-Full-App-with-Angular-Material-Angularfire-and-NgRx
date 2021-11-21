@@ -1,4 +1,3 @@
-
 <!-- <div fxLayout="column" fxFlex fxLayoutAlign="start stretch">
   <app-top-bar fxFlex="0 0 0"></app-top-bar>
   <div  fxLayout="row" fxFlex="1 1 auto"  fxLayoutAlign="start stretch" >
@@ -10,7 +9,9 @@
 
 </div> -->
 
+<!--following is implementation of grid above one is flex-->
 
+<!--
 <div  gdAreas="header header   | sideLeft midPart "
 gdAlignRows="stretch stretch" gdAlignColumns="stratch stratch"
 gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
@@ -19,4 +20,16 @@ gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
   <app-side-bar gdArea="sideLeft"></app-side-bar>
   <div  gdArea="midPart" gdGridAlign="stratch stratch"  ><router-outlet></router-outlet></div>
 
-</div>
+</div> -->
+
+
+<mat-toolbar  color="primary"></mat-toolbar>
+<mat-sidenav-container  fxFlex fxAlign="start stratch" hasBackdrop="false">
+
+<mat-sidenav    opened="true" disableClose="true"><app-side-bar> </app-side-bar></mat-sidenav>
+  <mat-sidenav-content fxLayout fxLayoutAlign="center center">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
