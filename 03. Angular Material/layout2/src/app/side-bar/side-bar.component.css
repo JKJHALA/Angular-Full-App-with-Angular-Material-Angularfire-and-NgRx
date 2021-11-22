@@ -4,7 +4,9 @@ div{
 
 }
 
-
+.nav-caption{
+  padding: 1em 1em;
+}
 
 ul{
   color:lightgray;

@@ -8,10 +8,14 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from '@angular/material/toolbar'
-
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
-    imports:[MatButtonModule ,MatInputModule, MatFormFieldModule , FlexLayoutModule, MatSidenavModule ,MatListModule ,MatIconModule,MatToolbarModule],
-    exports:[MatButtonModule,MatInputModule,MatFormFieldModule,FlexLayoutModule,     MatSidenavModule, MatListModule,MatIconModule,MatToolbarModule]
+    imports:[MatButtonModule ,MatInputModule, MatFormFieldModule ,
+       FlexLayoutModule, MatSidenavModule ,MatListModule ,MatIconModule,
+       MatToolbarModule , MatCardModule],
+    exports:[MatButtonModule,MatInputModule,MatFormFieldModule,
+      FlexLayoutModule,     MatSidenavModule, MatListModule,MatIconModule,
+      MatToolbarModule,MatCardModule]
 })
 export class MaterialModule{}MatSidenavModule

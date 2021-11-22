@@ -1,9 +1,13 @@
 
-<div class="page" fxFlex="1 1 auto"  fxFlex   fxLayout="column" fxLayoutAlign="center center" >
+<!-- <div class="page" fxFlex="1 1 auto"  fxFlex   fxLayout="column" fxLayoutAlign="center center" >
 
-<div class="control"  fxLayout="column" fxLayoutAlign="center center"  [formGroup]="loginFG">
+<div class="control"  fxLayout="column" fxLayoutAlign="center center"  [formGroup]="loginFG"> -->
 
+  <mat-card class="login-page">
+    <mat-card-title>Login</mat-card-title>
 
+<mat-card-content >
+ <form fxLayout="column" fxLayoutAlign="center center"  [formGroup]="loginFG">
   <mat-form-field>
     <input matInput placeholder="Login" formControlName="loginName">
     <mat-error>Must be valid email</mat-error>
@@ -27,7 +31,6 @@
 
 
   <button mat-raised-button color="primary">Login</button>
-
-</div>
-
-</div>
+</form>
+</mat-card-content>
+</mat-card>
