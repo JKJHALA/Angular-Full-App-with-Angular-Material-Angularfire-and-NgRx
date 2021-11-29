@@ -1,0 +1,599 @@
+<div>
+    <mat-accordion>
+        
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Carrier Performance</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="space-around start">
+                <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+                    <mat-label>Client</mat-label>
+                    <mat-form-field><input type="text" matInput></mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>from date</mat-label>
+                        <input matInput [matDatepicker]="CarrierPerformanceFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="CarrierPerformanceFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #CarrierPerformanceFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>to date</mat-label>
+                        <input matInput [matDatepicker]="CarrierPerformanceTopicker">
+                        <mat-datepicker-toggle matSuffix [for]="CarrierPerformanceTopicker"></mat-datepicker-toggle>
+                        <mat-datepicker #CarrierPerformanceTopicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayoutGap="20px">
+                    <mat-label color="warn">* Ship Date From and Ship Date To Are Compulsory</mat-label>
+                </div>
+                <div fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Load By Client</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-radio-group>
+                        <mat-radio-button color="primary" value="Shipments">Shipments</mat-radio-button>
+                        <mat-radio-button color="primary" value="Quotes">Quotes</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>from date</mat-label>
+                        <input matInput [matDatepicker]="LoadByClientFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="LoadByClientFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #LoadByClientFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>to date</mat-label>
+                        <input matInput [matDatepicker]="LoadByClientToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="LoadByClientToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #LoadByClientToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Shipment And Quote</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ShipandQuoteShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="ShipandQuoteShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ShipandQuoteShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ShipandQuoteShipTopicker">
+                        <mat-datepicker-toggle matSuffix [for]="ShipandQuoteShipTopicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ShipandQuoteShipTopicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ShipandQuoteInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="ShipandQuoteInvFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ShipandQuoteInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ShipandQuoteInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="ShipandQuoteInvToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ShipandQuoteInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Daily Activity</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyActivityShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyActivityShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyActivityShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyActivityShipTopicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyActivityShipTopicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyActivityShipTopicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyActivityInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyActivityInvFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyActivityInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyActivityInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyActivityInvToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyActivityInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Invoice Summary</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="InvoiceSummaryInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="InvoiceSummaryInvFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #InvoiceSummaryInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="InvoiceSummaryInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="InvoiceSummaryInvToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #InvoiceSummaryInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-checkbox color="primary">Include all clients for user</mat-checkbox>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Manifest Invoice</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ManifestInvoiceShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="ManifestInvoiceShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ManifestInvoiceShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ManifestInvoiceToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="ManifestInvoiceToFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ManifestInvoiceToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ManifestInvoiceInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="ManifestInvoiceInvFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ManifestInvoiceInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="ManifestInvoiceInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="ManifestInvoiceInvToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ManifestInvoiceInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Manifest Number</mat-label>
+                        <input matInput placeholder="Manifest Number">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-checkbox color="primary">Include all clients for user</mat-checkbox>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>*From both dates,one date or manifest invoice is required</mat-label>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Download</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Daily/Monthly Shipments</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Order Number</mat-label>
+                        <input matInput placeholder="Order Number">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyMonthlyShipmentShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyMonthlyShipmentShipFrompicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #DailyMonthlyShipmentShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyMonthlyShipmentToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyMonthlyShipmentToFrompicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #DailyMonthlyShipmentToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyMonthlyShipmentInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyMonthlyShipmentInvFromPicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #DailyMonthlyShipmentInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyMonthlyShipmentInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyMonthlyShipmentInvToPicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #DailyMonthlyShipmentInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Carrier Name</mat-label>
+                        <input matInput placeholder="Carrier Name">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Load Number</mat-label>
+                        <input matInput placeholder="Load Number">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Bill Term</mat-label>
+                        <mat-select>
+                            <mat-option value="None">----Select Bill Term----</mat-option>
+                            <mat-option value="3rdParty">3rd Party</mat-option>
+                            <mat-option value="3rdPartyCollect">3rd Party Collect</mat-option>
+                            <mat-option value="3rdPartyPreapid">3rd Party Prepaid</mat-option>
+                            <mat-option value="Collect">Collect</mat-option>
+                            <mat-option value="prepaid">Prepaid</mat-option>
+                            <mat-option value="prepaid&Add">Prepaid & Add</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Key Performance Indicator</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="KPIShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="KPIShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #KPIShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="KPIToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="KPIToFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #KPIToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Carrier Summary</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="CarrierSummaryShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="CarrierSummaryShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #CarrierSummaryShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="CarrierSummaryToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="CarrierSummaryToFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #CarrierSummaryToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="CarrierSummaryInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="CarrierSummaryInvFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #CarrierSummaryInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="CarrierSummaryInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="CarrierSummaryInvToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #CarrierSummaryInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-checkbox color="primary">Include all clients for user</mat-checkbox>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Daily Dispatch Log</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Carrier Name</mat-label>
+                        <input matInput placeholder="Order Number">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyDispatchLogShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyDispatchLogShipFrompicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #DailyDispatchLogShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyDispatchLogToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyDispatchLogToFrompicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #DailyDispatchLogToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Origin</mat-label>
+                        <input matInput placeholder="Carrier Name">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Destination</mat-label>
+                        <input matInput placeholder="Load Number">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Daily Shipment</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="50px">
+                    <mat-radio-group>
+                        <mat-radio-button color="primary" value="Standard">Standard</mat-radio-button>
+                        <mat-radio-button color="primary" value="WithBenchMark">With Benchmark</mat-radio-button>
+                        <mat-radio-button color="primary" value="PPS">PPS</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyShipmentShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyShipmentShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyShipmentShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyShipmentToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyShipmentToFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyShipmentToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyShipmentInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyShipmentInvFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyShipmentInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyShipmentInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyShipmentInvToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyShipmentInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-checkbox color="primary">Include all clients for user</mat-checkbox>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report For All Clients</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Load By Client Details</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="LoadByClientDetailsShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="LoadByClientDetailsShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #LoadByClientDetailsShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="LoadByClientDetailsToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="LoadByClientDetailsToFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #LoadByClientDetailsToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Shipment Details Load By Client</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyDetailsByClientShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyDetailsByClientShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyDetailsByClientShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyDetailsByClientShipTopicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyDetailsByClientShipTopicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyDetailsByClientShipTopicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Invoice Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyDetailsByClientInvFromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyDetailsByClientInvFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyDetailsByClientInvFromPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="DailyDetailsByClientInvToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="DailyDetailsByClientInvToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #DailyDetailsByClientInvToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Payment Details By Invoice</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Invoice Number</mat-label>
+                        <input matInput placeholder="Invoice Number">
+                    </mat-form-field>
+                </div> 
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Print</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Non-Compliance Report</mat-panel-title>
+                <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxFlexFill>
+                <div fxLayout="row" fxLayoutGap="50px">
+                    <mat-radio-group>
+                        <mat-radio-button color="primary" value="pdf">Pdf</mat-radio-button>
+                        <mat-radio-button color="primary" value="Xls">Xls</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-label>Ship Date From</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="NonComplianceShipFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="NonComplianceShipFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #NonComplianceShipFrompicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-label>To</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="NonComplianceToFrompicker">
+                        <mat-datepicker-toggle matSuffix [for]="NonComplianceToFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #NonComplianceToFrompicker></mat-datepicker>
+                    </mat-form-field>
+                </div>                
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <mat-checkbox color="primary">Include all clients for user</mat-checkbox>
+                </div>
+                <div fxLayoutGap="20px">
+                    <mat-label color="warn">* Ship Date From and Ship Date To Are Compulsory</mat-label>
+                </div>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button mat-raised-button color="primary" type="submit" class="button">Show Report</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</div>

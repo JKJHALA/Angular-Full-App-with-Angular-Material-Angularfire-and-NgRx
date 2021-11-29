@@ -1,0 +1,41 @@
+<!-- <div class="page" fxFlex="1 1 auto"  fxFlex   fxLayout="column" fxLayoutAlign="center center" >
+
+<div class="control"  fxLayout="column" fxLayoutAlign="center center"  [formGroup]="loginFG"> -->
+
+
+
+  <mat-card class="login-page">
+    <mat-card-title>Login</mat-card-title>
+
+    <mat-card-content>
+      <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginFG" (ngSubmit)="DoLogin()">
+        <mat-form-field>
+          <input matInput placeholder="Login" formControlName="loginName">
+          <mat-error>Must be valid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Password" formControlName="password">
+
+          <div
+            *ngIf="loginFG.get('password')?.invalid &&(loginFG.get('password')?.dirty || loginFG.get('password')?.touched) ">
+            <div *ngIf="loginFG.get('password')?.errors?.['required']">
+              <mat-error>Password cannot be blank</mat-error>
+            </div>
+            <div *ngIf="loginFG.get('password')?.errors?.['minlength']">
+              <mat-error> min 6 char neede you keyed {{loginFG.get('password')?.value.length}} </mat-error>
+            </div>
+          </div>
+
+
+
+        </mat-form-field>
+
+        <div fxFlex flexLayout="row" fxLayoutGap="15px"> <button mat-raised-button color="primary">Login</button>
+          <button mat-raised-button color="primary">Forgot Password</button>
+        </div>
+
+
+      </form>
+    </mat-card-content>
+  </mat-card>

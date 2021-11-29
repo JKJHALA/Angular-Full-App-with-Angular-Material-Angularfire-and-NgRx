@@ -22,14 +22,49 @@ gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
 
 </div> -->
 
+<!-- <div>
 
-<mat-toolbar  color="primary"  ><app-top-bar fxLayout="row" fxFlex></app-top-bar></mat-toolbar>
-<mat-sidenav-container  fxFlex fxAlign="start stratch" hasBackdrop="false">
+  <div>
+    <mat-toolbar color="primary">
+      <app-top-bar fxLayout="row" fxFlex></app-top-bar>
+    </mat-toolbar>
+  </div>
+  
+  <div>
+    <mat-sidenav-container fxFlex fxAlign="start stratch" hasBackdrop="false" autosize>
+      <mat-sidenav opened="true" disableClose="true" mode="side">
+        <app-side-bar> </app-side-bar>
+      </mat-sidenav>
+      <mat-sidenav-content fxLayout fxLayoutAlign="center center">
+        <div style="margin-top: 10px;">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
 
-<mat-sidenav    opened="true" disableClose="true"><app-side-bar> </app-side-bar></mat-sidenav>
-  <mat-sidenav-content fxLayout fxLayoutAlign="center center">
+</div> -->
+
+
+
+<mat-toolbar color="primary" FxFlex FxFlexLayout>
+  <div fxShow="true" fxHide="false">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div fxFlex>
+    <app-top-bar></app-top-bar>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container fxFlex fxFill>
+  <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false">
+    <div>
+      <app-side-bar></app-side-bar>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,15 @@ export class LoginComponent implements OnInit {
     password  : new FormControl('',[Validators.required,Validators.minLength(6)]),
   })
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  DoLogin()
+  {  
+      this.router.navigateByUrl('/rating');   
+      //this.router.navigate(['rating']);   
   }
 
 }
