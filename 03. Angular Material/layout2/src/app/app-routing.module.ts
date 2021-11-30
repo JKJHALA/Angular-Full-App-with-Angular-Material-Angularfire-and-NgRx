@@ -10,6 +10,7 @@ import { LadingBoardComponent } from './shipment-ltl/lading-board/lading-board.c
 import { LadingBoardTLComponent } from './shipment-tl/lading-board-tl/lading-board-tl.component';
 import { ProductComponent } from './product/products/product.component';
 import { LocationComponent } from './location/locations/location.component';
+import { LocationEntryPanelComponent } from './location/location-entry-panel/location-entry-panel.component';
 import { ReportsComponent } from './report/reports/reports.component';
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'shipmentTL', component: LadingBoardTLComponent },
   { path: 'product', component: ProductComponent },
   { path: 'location', component: LocationComponent },
-  { path: 'reports', component: ReportsComponent }
+  { path: 'reports', component: ReportsComponent },
+  { path: 'locationEntryPanel', component: LocationEntryPanelComponent }
 ];
 
 @NgModule({
