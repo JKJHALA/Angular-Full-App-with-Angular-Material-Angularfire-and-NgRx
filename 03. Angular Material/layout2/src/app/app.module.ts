@@ -1,8 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
@@ -17,7 +17,13 @@ import { ShipmentTLModule } from './shipment-tl/shipment-tl.module';
 import { ProductModule } from './product/product.module';
 import { LocationModule } from './location/location.module';
 import { ReportModule } from './report/report.module';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { environment } from 'environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { metaReducers, reducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,7 @@ import { ReportModule } from './report/report.module';
     SignupComponent,
     TopBarComponent,
     SideBarComponent,
-    TpageComponent,    
+    TpageComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,11 +45,16 @@ import { ReportModule } from './report/report.module';
     ShipmentLTLModule,
     ShipmentTLModule,
     ProductModule,
-    LocationModule,    
-    ReportModule
+    LocationModule,
+    ReportModule,
+    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+
+   //StoreModule.forRoot(reducers,{metaReducers}),
+   // StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
   ],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
+    //CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
   bootstrap: [AppComponent]

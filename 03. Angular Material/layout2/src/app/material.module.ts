@@ -11,42 +11,43 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+//import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 
 @NgModule({
-   imports: [MatButtonModule, 
-      MatInputModule,    
+   imports: [MatButtonModule,
+      MatInputModule,
       MatFormFieldModule,
-      FlexLayoutModule, 
+      FlexLayoutModule,
       MatSidenavModule,
-      MatListModule, 
+      MatListModule,
       MatIconModule,
-      MatToolbarModule, 
-      MatCardModule, 
-      MatExpansionModule, 
+      MatToolbarModule,
+      MatCardModule,
+      MatExpansionModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      MatMomentDateModule,
+     MatMomentDateModule,
       MatCheckboxModule,
       MatSelectModule,
       MatRadioModule,
       MatAutocompleteModule
    ],
-   exports: [MatButtonModule, 
-      MatInputModule, 
+   exports: [MatButtonModule,
+      MatInputModule,
       MatFormFieldModule,
-      FlexLayoutModule, 
-      MatSidenavModule, 
-      MatListModule, 
+      FlexLayoutModule,
+      MatSidenavModule,
+      MatListModule,
       MatIconModule,
-      MatToolbarModule, 
-      MatCardModule, 
-      MatExpansionModule, 
+      MatToolbarModule,
+      MatCardModule,
+      MatExpansionModule,
       MatDatepickerModule,
       MatNativeDateModule,
       MatMomentDateModule,
@@ -54,6 +55,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
       MatSelectModule,
       MatRadioModule,
       MatAutocompleteModule
-   ]   
+   ]
 })
 export class MaterialModule { }
