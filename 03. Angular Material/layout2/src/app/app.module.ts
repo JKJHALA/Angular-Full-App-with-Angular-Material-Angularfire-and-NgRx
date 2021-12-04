@@ -24,6 +24,12 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { metaReducers, reducers } from './reducers';
+import { AuthenticationService } from './auth/auth.service';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './system-service/auth.interceptor';
+import { EntityDataModule } from '@ngrx/data';
+import { EffectsModule } from '@ngrx/effects';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +46,7 @@ import { metaReducers, reducers } from './reducers';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AuthModule,
     HomeModule,
     ShipmentLTLModule,
@@ -47,16 +54,23 @@ import { metaReducers, reducers } from './reducers';
     ProductModule,
     LocationModule,
     ReportModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot({}),
 
-   //StoreModule.forRoot(reducers,{metaReducers}),
-   // StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
+
+    //StoreModule.forRoot(reducers,{metaReducers}),
+    // StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
   ],
   schemas: [
     //CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

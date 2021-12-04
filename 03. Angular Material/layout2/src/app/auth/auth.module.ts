@@ -15,7 +15,7 @@ import * as fromAuth from './reducers';
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers)
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer)
   ]
 })
 export class AuthModule { }

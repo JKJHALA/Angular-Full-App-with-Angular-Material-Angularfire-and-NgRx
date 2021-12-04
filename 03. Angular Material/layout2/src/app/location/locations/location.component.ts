@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { LocationEntityService } from '../services/location-entity.service';
 
 
 @Component({
@@ -9,13 +10,16 @@ import {Router} from '@angular/router';
 })
 export class LocationComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private locationService:LocationEntityService) { }
 
   ngOnInit(): void {
+
+    this.locationService.getAll();
+
   }
 
   AddLocationClick()
   {
-    this.router.navigateByUrl('/locationEntryPanel');   
+    this.router.navigateByUrl('/locationEntryPanel');
   }
 }
