@@ -1,2 +1,21 @@
 <button mat-raised-button color="primary"
 class="button" (click)="AddLocationClick()">Add Location</button>
+
+<table mat-table [dataSource]="locations$" fxFlex>
+
+  <ng-container matColumnDef="LocationId">
+  <th mat-header-cell *matHeaderCellDef>Location Id</th>
+  <td mat-cell *matCellDef="let element">{{element.LocationId}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.Name}}</td>
+    </ng-container>
+
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+
+</table>

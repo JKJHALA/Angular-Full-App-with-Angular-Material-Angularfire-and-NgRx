@@ -17,7 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
-
+import {MatTableModule} from '@angular/material/table'
 
 @NgModule({
    imports: [MatButtonModule,
@@ -36,7 +36,8 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
       MatCheckboxModule,
       MatSelectModule,
       MatRadioModule,
-      MatAutocompleteModule
+      MatAutocompleteModule,
+      MatTableModule
    ],
    exports: [MatButtonModule,
       MatInputModule,
@@ -54,7 +55,8 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
       MatCheckboxModule,
       MatSelectModule,
       MatRadioModule,
-      MatAutocompleteModule
+      MatAutocompleteModule,
+      MatTableModule
    ]
 })
 export class MaterialModule { }

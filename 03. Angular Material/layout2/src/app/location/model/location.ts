@@ -1,6 +1,7 @@
 import { LocationType } from "./location-type.enum";
 
 export interface Location {
+  LocationId?:number;
   CountryCode?: string;
   CountryName?: string;
   CountryId?: number;

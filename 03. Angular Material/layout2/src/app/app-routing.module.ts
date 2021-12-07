@@ -9,9 +9,10 @@ import { RatingComponent } from './home/rating/rating.component';
 import { LadingBoardComponent } from './shipment-ltl/lading-board/lading-board.component';
 import { LadingBoardTLComponent } from './shipment-tl/lading-board-tl/lading-board-tl.component';
 import { ProductComponent } from './product/products/product.component';
-import { LocationComponent } from './location/locations/location.component';
+import { LocationsComponent } from './location/locations/locations.component';
 import { LocationEntryPanelComponent } from './location/location-entry-panel/location-entry-panel.component';
 import { ReportsComponent } from './report/reports/reports.component';
+import { LocationContainerComponent } from './location/location-container/location-container.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -24,9 +25,9 @@ const routes: Routes = [
   { path: 'shipment', component: LadingBoardComponent },
   { path: 'shipmentTL', component: LadingBoardTLComponent },
   { path: 'product', component: ProductComponent },
-  { path: 'location', component: LocationComponent },
+  { path: 'location', component: LocationsComponent },
   { path: 'reports', component: ReportsComponent },
-  { path: 'locationEntryPanel', component: LocationEntryPanelComponent }
+  { path: 'addEditlocation', component: LocationContainerComponent }
 ];
 
 @NgModule({
