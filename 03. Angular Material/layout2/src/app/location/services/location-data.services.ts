@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DefaultDataService, HttpUrlGenerator } from "@ngrx/data";
+import { DefaultDataService, HttpMethods, HttpUrlGenerator, QueryParams } from "@ngrx/data";
 import { client } from "app/auth/auth.selectors";
 import { map, Observable } from "rxjs";
 import { Location } from "../model/location";
@@ -21,11 +21,13 @@ export class LocationDataService extends DefaultDataService<Location>{
    //   https://devwtcustomer.tmssaas.com/Services/Wcf/LocationService.svc/json/GetLocationsByClient
    // const locUrl = this.domainUrl + 'Services/MasLocationService.svc/json/GetLocationByType';
 
-    const locUrl = this.domainUrl + 'Services/Wcf/LocationService.svc/json/GetLocationsByClient';
+    const locUrl = this.domainUrl + 'Services/Wcf/LocationService.svc/json/GetPagedLocationForClient';
 
 
     let params = new HttpParams();
     params = params.set('clientID', "1132")
+    .append('pageNo',1)
+    .append('recordCount',10)
     .append('LocationTypeID', '3')
     .append('LocationName', "abc")
 
@@ -33,14 +35,31 @@ export class LocationDataService extends DefaultDataService<Location>{
 
     return this.http.get(locUrl,options)
       .pipe(
-        map(res => (res as locRes)["GetLocationsByClientResult"])
+        map(res => (res as locRes)["GetPagedLocationForClientResult"])
       )
   }
+
+  //just to demostrate any customer para /method can be used
+   override getWithQuery(queryParams: QueryParams | string) :Observable<Location[]>{
+    const locUrl = this.domainUrl + 'Services/Wcf/LocationService.svc/json/GetPagedLocationForClient?'+ queryParams ;
+
+
+
+   // const httpOptions = { params }; //can use sprade operator and append to existing options
+    return this.http.get(locUrl) //can switch based on method name
+      .pipe(
+        map(res => (res as locRes)["GetPagedLocationForClientResult"])
+      )
+
+  }
+
+
+
 
 }
 
 
 //wrokaround to ignore ts error
 interface locRes {
-  GetLocationsByClientResult: []
+  GetPagedLocationForClientResult: []
 }
