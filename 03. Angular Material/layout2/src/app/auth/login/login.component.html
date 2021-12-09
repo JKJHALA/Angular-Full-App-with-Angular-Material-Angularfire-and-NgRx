@@ -5,10 +5,10 @@
 
 
   <mat-card class="login-page">
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>SAAS Login</mat-card-title>
 
     <mat-card-content>
-      <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginFG" (ngSubmit)="DoLogin()">
+      <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginFG" (ngSubmit)="DoLogin()" fxLayoutGap="5px">
         <mat-form-field>
           <input matInput placeholder="Login" formControlName="loginName">
           <mat-error>Must be valid email</mat-error>
@@ -26,12 +26,17 @@
               <mat-error> min 6 char neede you keyed {{loginFG.get('password')?.value.length}} </mat-error>
             </div>
           </div>
-
-
-
         </mat-form-field>
 
-        <div fxFlex flexLayout="row" fxLayoutGap="15px"> <button mat-raised-button color="primary">Login</button>
+        <div>
+          <div fxFlex fxFlexAlign="start center">
+            <mat-checkbox color="primary">Remember me</mat-checkbox>
+          </div>
+        </div>
+        
+
+        <div fxFlex fxLayoutGap="15px"> 
+          <button mat-raised-button color="primary">Login</button>
           <button mat-raised-button color="primary">Forgot Password</button>
         </div>
 

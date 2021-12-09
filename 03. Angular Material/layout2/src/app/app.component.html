@@ -60,10 +60,10 @@ gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
 
 <mat-sidenav-container fxFlex fxFill>
   <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false">
-    <div>
+    <div fxFlex>
       <app-side-bar></app-side-bar>
     </div>
-  </mat-sidenav>
+  </mat-sidenav> 
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

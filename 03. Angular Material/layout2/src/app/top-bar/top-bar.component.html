@@ -1,10 +1,38 @@
-<div fxLayout="row" fxLayoutAlign="start stretch" fxFlex>
+<div fxLayout="row" fxLayoutAlign="start start">
   <div fxFlex><img fxFlex="0 1 auto" src="/assets/images/logo.jpg" alt="Logo"></div>
 </div>
 
-<div class="userInfo" fxFlex="0.1 0.1 0" fxFlexAlign="end">
-  <div>
-    <div class="userInfo">Jaydip Jhala</div>
-    <div>NewAge Infotech</div>   
+<div fxLayout="column" fxLayoutAlign="center center" fxFlex>
+  <div>CAP LOGISTICS</div>
+  <div>LESS THAN TRUCK LOAD SOLUTIONS</div>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="end start">
+  <div style="font: 500 13px/20px Roboto, Helvetica Neue, sans-serif;">Phone : 800-227-2471</div>
+  <div style="font: 500 13px/20px Roboto, Helvetica Neue, sans-serif;">Fax : 303-333-3802</div>
+  <div style="font: 500 13px/20px Roboto, Helvetica Neue, sans-serif;">Email : ltl@caplogistics.com</div>
+</div>
+
+<div class="userInfo" fxFlexAlign="center end">
+  <div fxFlexAlign="center center">
+    <button mat-mini-fab matTooltip="Superadmin" [matMenuTriggerFor]="menu" [matTooltipPosition]="position.value"
+      color="warn" style="margin-top: 10px;">
+      <mat-icon>perm_identity</mat-icon>
+    </button>
+    <mat-menu #menu>
+      <button mat-menu-item>
+        <mat-icon>account_box</mat-icon>
+        <span>User Profile</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>vpn_lock</mat-icon>
+        <span>Change Password</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+
   </div>
 </div>

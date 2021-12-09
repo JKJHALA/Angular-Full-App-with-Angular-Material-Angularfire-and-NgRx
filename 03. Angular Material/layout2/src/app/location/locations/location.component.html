@@ -1,1 +1,54 @@
-<button mat-raised-button color="primary" class="button" (click)="AddLocationClick()">Add Location</button>
+<div fxFill>
+    <button mat-raised-button color="primary" class="button" (click)="AddLocationClick()">Add Location</button>
+
+    <table mat-table [dataSource]="locations" class="mat-elevation-z8" matSort>
+    
+        <ng-container matColumnDef="ShortName">
+          <th mat-header-cell *matHeaderCellDef> ShortName </th>
+          <td mat-cell *matCellDef="let element"> {{element.ShortName}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Active">
+          <th mat-header-cell *matHeaderCellDef> Active </th>
+          <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="Country">
+          <th mat-header-cell *matHeaderCellDef> Country </th>
+          <td mat-cell *matCellDef="let element"> {{element.Country}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="State">
+            <th mat-header-cell *matHeaderCellDef> State </th>
+            <td mat-cell *matCellDef="let element"> {{element.State}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="City">
+            <th mat-header-cell *matHeaderCellDef> City </th>
+            <td mat-cell *matCellDef="let element"> {{element.City}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="Postal">
+            <th mat-header-cell *matHeaderCellDef> Postal </th>
+            <td mat-cell *matCellDef="let element"> {{element.Postal}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="Group">
+            <th mat-header-cell *matHeaderCellDef> Group </th>
+            <td mat-cell *matCellDef="let element"> {{element.Group}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="LocationType">
+            <th mat-header-cell *matHeaderCellDef> LocationType </th>
+            <td mat-cell *matCellDef="let element"> {{element.LocationType}} </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+</div>
