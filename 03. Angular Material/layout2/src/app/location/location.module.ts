@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module'
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationsComponent } from './locations/locations.component';
@@ -33,12 +33,12 @@ const entityMetadata: EntityMetadataMap = {
     MaterialModule,
     FormsModule,
     BrowserAnimationsModule,
-    BrowserModule,
-
+    BrowserModule,    
+    ReactiveFormsModule,
   ],
   providers:[
     LocationEntityService,
-    LocationDataService
+    LocationDataService,    
   ]
 })
 export class LocationModule {

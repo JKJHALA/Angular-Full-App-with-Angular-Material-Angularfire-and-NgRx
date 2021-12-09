@@ -1,1 +1,185 @@
-<p>location-entry-panel works!</p>
+<mat-card>
+    <form [formGroup]="locationEntryFormGroup" (ngSubmit)="SaveClick()">
+        <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="50px">
+            <div fxLayout="column" fxLayoutAlign="center start">
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Shot Name</mat-label>
+                        <input type="text" matInput placeholder="Short Name" formControlName="ShortName">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Location Type</mat-label>
+                        <mat-select name="locationtype" formControlName="LocationType">
+                            <mat-option *ngFor="let type of locationTypes" [value]="type">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Location Name</mat-label>
+                        <input type="text" matInput placeholder="Location Name" formControlName="Name">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="Active Date" [matDatepicker]="ActiveDatepicker" formControlName="ActiveDate">
+                        <mat-datepicker-toggle matSuffix [for]="ActiveDatepicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #ActiveDatepicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <input matInput placeholder="Deactivation Date" [matDatepicker]="DeactivationDatepicker" formControlName="DeActivationDate">
+                        <mat-datepicker-toggle matSuffix [for]="DeactivationDatepicker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #DeactivationDatepicker ></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Address 1</mat-label>
+                        <input type="text" matInput placeholder="Address 1" formControlName="Address1">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Address 2</mat-label>
+                        <input type="text" matInput placeholder="Address 2" formControlName="Address2">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-checkbox class="example-margin" style="padding-bottom: 25px;padding-top:10px;" formControlName="IsActive">Is Active
+                    </mat-checkbox>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start">
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Country</mat-label>
+                        <mat-select name="country">
+                            <mat-option *ngFor="let type of country" [value]="type">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Postal</mat-label>
+                        <input type="text" matInput placeholder="Postal" formControlName="PostalCode">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>State</mat-label>
+                        <input type="text" matInput placeholder="State" formControlName="StateName">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>City</mat-label>
+                        <input type="text" matInput placeholder="City" formControlName="CityName">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Location Reference</mat-label>
+                        <input type="text" matInput placeholder="Location Reference" formControlName="LocationReference">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Inbound Account</mat-label>
+                        <input type="text" matInput placeholder="Inbound Account" formControlName="InboundAccount">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Outbound Account</mat-label>
+                        <input type="text" matInput placeholder="Outbound Account" formControlName="OutboundAccount">
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Created By</mat-label>
+                        <input type="text" matInput placeholder="Created By" >
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start">
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Contact Name</mat-label>
+                        <input type="text" matInput placeholder="Contact Name" formControlName="ContactName">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <div fxFlex="70%" fxLayoutAlign="center center">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Contact Phone</mat-label>
+                            <input type="text" matInput placeholder="Contact Phone" formControlName="ContactPhone">
+                            <!-- <input type="text" matInput placeholder="Ext"> -->
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex fxLayoutAlign="end center">
+                        <mat-form-field appearance="fill" style="max-width: 50px;">
+                            <mat-label>Ext</mat-label>
+                            <input type="text" matInput placeholder="Ext" formControlName="ContactPhoneExt">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Contact Email</mat-label>
+                        <input type="text" matInput placeholder="Contact Email" formControlName="ContactPhoneExt">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Open Time</mat-label>
+                        <mat-select name="opentime" formControlName="ExpectedPickupReadyTime">
+                            <mat-option *ngFor="let time of Times" [value]="time" >
+                                {{time}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Close Time</mat-label>
+                        <mat-select name="closetime" formControlName="ExpectedPickupCloseTime">
+                            <mat-option *ngFor="let time of Times" [value]="time" >
+                                {{time}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-radio-group aria-label="Select an option" fxLayoutGap="25px" formControlName="Approve">
+                        <mat-radio-button value="Approve" style="padding-bottom: 30px;padding-top: 10px;">Approve
+                        </mat-radio-button>
+                        <mat-radio-button value="UnApprove" style="padding-bottom: 30px;padding-top: 10px">UnApprove
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div fxLayout="row" fxFlex fxLayoutGap="5px">
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label>Notes</mat-label>
+                        <textarea type="text" matInput placeholder="Notes" style="resize: none;" formControlName="Notes"></textarea>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxflex fxLayoutAlign="end space-around" fxLayoutGap="25px">
+                    <button mat-raised-button>Cancel</button>
+                    <button mat-raised-button color="primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</mat-card>

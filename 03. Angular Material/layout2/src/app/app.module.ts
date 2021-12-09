@@ -29,6 +29,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { AuthInterceptor } from './system-service/auth.interceptor';
 import { EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
+import { entityConfig } from './entity-metadata';
 
 
 @NgModule({
@@ -58,6 +59,8 @@ import { EffectsModule } from '@ngrx/effects';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({}),
+    StoreModule.forRoot({}, {}),
+    EntityDataModule.forRoot(entityConfig),
 
 
     //StoreModule.forRoot(reducers,{metaReducers}),
