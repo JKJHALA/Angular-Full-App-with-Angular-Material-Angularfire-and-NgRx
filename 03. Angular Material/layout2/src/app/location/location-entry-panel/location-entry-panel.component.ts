@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationAdeptor } from '../locationAdeptor';
 
 @Component({
   selector: 'app-location-entry-panel',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationEntryPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private locationAdeptor: LocationAdeptor
+
+  ) { }
 
   ngOnInit(): void {
+
+
+
   }
 
 }

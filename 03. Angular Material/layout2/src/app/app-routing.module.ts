@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'location', component: LocationsComponent },
   { path: 'reports', component: ReportsComponent },
-  { path: 'addEditlocation', component: LocationContainerComponent }
+  { path: 'addEditlocation/:locationId', component: LocationContainerComponent }
 ];
 
 @NgModule({

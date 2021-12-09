@@ -29,7 +29,7 @@ gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
       <app-top-bar fxLayout="row" fxFlex></app-top-bar>
     </mat-toolbar>
   </div>
-  
+
   <div>
     <mat-sidenav-container fxFlex fxAlign="start stratch" hasBackdrop="false" autosize>
       <mat-sidenav opened="true" disableClose="true" mode="side">
@@ -65,6 +65,8 @@ gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
+    <div FxLayout="column" fxFill fxFlex>
     <router-outlet></router-outlet>
+  </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
