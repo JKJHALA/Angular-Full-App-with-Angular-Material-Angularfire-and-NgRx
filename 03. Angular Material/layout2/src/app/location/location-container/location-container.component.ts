@@ -14,7 +14,8 @@ import { LocationAdeptor } from '../locationAdeptor';
 @Component({
   selector: 'app-location-container',
   templateUrl: './location-container.component.html',
-  styleUrls: ['./location-container.component.css']
+  styleUrls: ['./location-container.component.css'],
+  providers: [LocationAdeptor]
 })
 export class LocationContainerComponent implements OnInit {
 

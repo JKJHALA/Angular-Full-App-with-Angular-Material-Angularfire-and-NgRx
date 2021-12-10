@@ -37,6 +37,19 @@ export interface Location {
   IsValid?: boolean;
   PortCode?: string;
   FiveDigitPortCode?: string;
+
+  /*YATIN ADDED BY YATIN*/
+  ShortName:string;
+  ActiveDate:Date;
+  DeActivationDate:Date;
+  IsActive:Boolean;
+  LocationReference:string;
+  InboundAccount:string;
+  OutboundAccount:string;
+  Notes:string;
+  Approve:Boolean;
+  UnApproved:Boolean;
+  ContactPhoneExt:string;
 }
 
 
