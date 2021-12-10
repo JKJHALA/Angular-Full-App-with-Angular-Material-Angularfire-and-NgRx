@@ -36,7 +36,9 @@ export class LocationContainerComponent implements OnInit {
     this.locationAdeptor.currentLocation$ =this.locationService.collection$.pipe(
       select(selectLocationlById(this.locationId)))
 
+    this.locationAdeptor.currentLocation$.subscribe(
 
+    )
 
   }
 
