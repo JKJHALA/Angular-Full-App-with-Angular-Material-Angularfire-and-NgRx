@@ -29,20 +29,26 @@ export class LocationContainerComponent implements OnInit {
   //private currentLocation$: Observable<Location | undefined> | undefined;
 
 
+
   ngOnInit(): void {
 
 
     this.locationId = '631535';
 
-    this.locationAdeptor.currentLocation$ =this.locationService.collection$.pipe(
+    this.locationAdeptor.currentLocation$ = this.locationService.collection$.pipe(
       select(selectLocationlById(this.locationId)))
 
-    this.locationAdeptor.currentLocation$.subscribe(
 
-    )
 
   }
 
+  saveLocation() {
 
+    console.log("in saveLocation")
+    if (this.locationAdeptor.location != undefined) {//can add validtion
+      this.locationService.update(this.locationAdeptor.location)
+      this.router.navigateByUrl('/location')
+    }
+  }
 
 }

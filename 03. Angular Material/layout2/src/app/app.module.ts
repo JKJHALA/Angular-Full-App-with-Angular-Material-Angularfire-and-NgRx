@@ -59,8 +59,8 @@ import { entityConfig } from './entity-metadata';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({}),
-    StoreModule.forRoot({}, {}),
-    EntityDataModule.forRoot(entityConfig),
+    //StoreModule.forRoot({}, {}),
+   // EntityDataModule.forRoot(entityConfig),
 
 
     //StoreModule.forRoot(reducers,{metaReducers}),

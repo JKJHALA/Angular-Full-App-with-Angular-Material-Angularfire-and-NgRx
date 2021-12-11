@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import {Location} from './model/location'
 
 
@@ -8,7 +8,19 @@ export class LocationAdeptor{
 
   public currentLocation$: Observable<Location | undefined> | undefined;
 
+  private editedLocation : Location| undefined;
 
+public get location():Location | undefined{
+  return this.editedLocation;
+}
+
+ public set location(l:Location|undefined)
+ {
+
+   //if needed do some validation
+   this.editedLocation=l;
+  console.log(this.editedLocation)
+ }
 
 
 }
