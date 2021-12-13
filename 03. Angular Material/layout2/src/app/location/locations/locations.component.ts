@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'app/reducers';
-import { BehaviorSubject, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest,  Observable, of } from 'rxjs';
 import { LocationEntityService } from '../services/location-entity.service';
 import {Location} from '../model/location'
 import { LocationAdeptor } from '../locationAdeptor';
@@ -34,16 +34,30 @@ export class LocationsComponent implements OnInit {
 
 
     //this.locationService.getLocationByPage
-    this.locations$= this.locationService.entities$
+    this.locations$=   this.locationService.entities$
+
+
+    combineLatest([this.locationService.count$,this.currentPage]).subscribe(
+      ([c,n]: any)=>
+    {
+      if( !( Number(c) >0  && n===1)) //don't subscribe on returning back or use router state
+      {
+             //bulid query in seprate helper/utility class/service
+      this.locationService.getWithQuery(`clientID=1132&pageNo=${n}&recordCount=10`)
+      }
+
+
+    })
 
     //save subccription and on deactivate unsubscribe
-    this.currentPage.subscribe(n=>(
+    // this.currentPage.subscribe(n=>(
 
-      //bulid query in seprate helper/utility class/service
-      this.locationService.getWithQuery(`clientID=1132&pageNo=${n}&recordCount=10`)
-    )
+    //     //bulid query in seprate helper/utility class/service
+    //   this.locationService.getWithQuery(`clientID=1132&pageNo=${n}&recordCount=10`)
 
-    )
+    // )
+
+    // )
 
   }
 
