@@ -30,18 +30,19 @@ export class LocationEntryPanelComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.locationAdeptor.currentLocation$ != undefined) {
+  if (this.locationAdeptor.currentLocation$ != undefined) {
       this.locationAdeptor.currentLocation$.subscribe(l => {
         if (l != undefined) this.displayCurrentLocation(l);
       }
       )
-    } //if comp
+} //if comp
 
 
     this.locationEntryFormGroup.valueChanges
       .pipe(
         debounceTime(1000)).subscribe(
           v => {
+
             if (this.locationEntryFormGroup.valid)
               this.locationAdeptor.location = { ...v }
           }

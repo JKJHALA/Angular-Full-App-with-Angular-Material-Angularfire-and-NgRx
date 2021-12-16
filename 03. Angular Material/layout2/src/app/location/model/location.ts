@@ -13,7 +13,7 @@ export interface Location {
   StateId?: number;
   StateName?: string;
   LocationType?: LocationType;
-  Name: string;
+  Name?: string;
   Address1?: string;
   Address2?: string;
   ContactName?: string;
@@ -39,20 +39,20 @@ export interface Location {
   FiveDigitPortCode?: string;
 
   /*YATIN ADDED BY YATIN*/
-  ShortName:string;
-  ActiveDate:Date;
-  DeActivationDate:Date;
-  IsActive:Boolean;
-  LocationReference:string;
-  InboundAccount:string;
-  OutboundAccount:string;
-  Notes:string;
-  Approve:Boolean;
-  UnApproved:Boolean;
-  ContactPhoneExt:string;
+  ShortName?:string;
+  ActiveDate?:Date | string;
+  DeActivationDate?:Date;
+  IsActive?:Boolean;
+  LocationReference?:string;
+  InboundAccount?:string;
+  OutboundAccount?:string;
+  Notes?:string;
+  Approve?:Boolean;
+  UnApproved?:Boolean;
+  ContactPhoneExt?:string;
 }
 
 
 export function compareLocations(l1: Location, l2: Location):number {
-  if (l1.Name < l2.Name) { return 1 } else { return -1 }
+  if (l1.Name! < l2.Name!) { return 1 } else { return -1 }
 }

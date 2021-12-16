@@ -1,6 +1,8 @@
 
 
-import { HttpClient, HttpParams } from '@angular/common/http';
+
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import {
   DefaultDataService,
@@ -63,26 +65,54 @@ export class LocationDataService extends DefaultDataService<Location> {
       .pipe(map((res) => (res as locRes)['GetPagedLocationForClientResult']));
   }
 
-  override update(location: Update<Location>) :Observable<Location>{
+  override update(locationChange: Update<Location>) :Observable<Location>{
 
+
+
+    const contentHeaders = new HttpHeaders();
+    contentHeaders.append('Accept', 'application/json');
+    contentHeaders.append('Content-Type', 'application/json');
+    let options = {headers: contentHeaders!};
+
+
+    let location:Location ={ LocationId: locationChange.id as number ,
+       ...locationChange.changes,
+
+      }
+
+      if ( locationChange.changes.ActiveDate instanceof Date)
+      {
+        location.ActiveDate=   `/Date(${locationChange.changes.ActiveDate!.getTime()}/`;
+
+      }
 
 
     const locUrl =
       this.domainUrl +
-      'Services/Wcf/LocationService.svc/json/UpdateMAS_Location';
+      'Services/Wcf/LocationService.svc/json/UpdateLocation';
 
-    this.http.post(locUrl, JSON.stringify(location)).subscribe();
+    this.http.post<Location>(locUrl, location, options).subscribe();
+
+    const getUrl=
+    this.domainUrl +
+      'Services/Wcf/LocationService.svc/json/GetLocationByLocatinID?locationid='+ location.LocationId
 
 
+      return this.http
+      .get(getUrl) //can switch based on method name
+      .pipe(map((res) => (res as locResbyId)['GetLocationByLocatinIDResult']))
 
-
-
-   return of({...newLocation,...location.changes});
 
   }
 
 
 }
+
+//wrokaround to ignore ts error
+interface locResbyId {
+  GetLocationByLocatinIDResult: Location;
+}
+
 
 //wrokaround to ignore ts error
 interface locRes {
