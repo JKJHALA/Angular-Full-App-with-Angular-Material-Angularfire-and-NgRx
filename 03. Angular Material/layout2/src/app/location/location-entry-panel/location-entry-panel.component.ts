@@ -110,7 +110,7 @@ export class LocationEntryPanelComponent implements OnInit {
       'PortCode': [''],
       'FiveDigitPortCode': [''],
       'ShortName': [''],
-      'ActiveDate': [null],
+      'ActivateDate': [null],
       'DeActivationDate': [null],
       'IsActive': [true],
       'LocationReference': [''],

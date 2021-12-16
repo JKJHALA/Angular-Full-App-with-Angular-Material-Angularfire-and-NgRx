@@ -40,7 +40,8 @@ export interface Location {
 
   /*YATIN ADDED BY YATIN*/
   ShortName?:string;
-  ActiveDate?:Date | string;
+
+  ActivateDate?:Date | string;
   DeActivationDate?:Date;
   IsActive?:Boolean;
   LocationReference?:string;
@@ -50,6 +51,7 @@ export interface Location {
   Approve?:Boolean;
   UnApproved?:Boolean;
   ContactPhoneExt?:string;
+  ClientId?:string;
 }
 
 

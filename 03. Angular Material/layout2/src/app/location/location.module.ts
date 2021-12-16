@@ -18,7 +18,7 @@ const entityMetadata: EntityMetadataMap = {
     sortComparer: compareLocations,
     selectId: (location:Location)=>location.LocationId?location.LocationId:0,
     entityDispatcherOptions: {
-      optimisticUpdate: false
+      optimisticUpdate: true
     }
   },
 
@@ -33,12 +33,12 @@ const entityMetadata: EntityMetadataMap = {
     MaterialModule,
     FormsModule,
     BrowserAnimationsModule,
-    BrowserModule,    
+    BrowserModule,
     ReactiveFormsModule,
   ],
   providers:[
     LocationEntityService,
-    LocationDataService,    
+    LocationDataService,
   ]
 })
 export class LocationModule {

@@ -63,7 +63,7 @@ export class LocationsComponent implements OnInit {
 
 
 addEditClick(){
-  this.router.navigate(['/addEditlocation','631529'],{relativeTo: this.route})
+  this.router.navigate(['/addEditlocation','631565'],{relativeTo: this.route})
   //this.locationService.getWithQuery('clientID=1132&pageNo=2&recordCount=10')
    // this.router.navigateByUrl('/addEditlocation');
 }

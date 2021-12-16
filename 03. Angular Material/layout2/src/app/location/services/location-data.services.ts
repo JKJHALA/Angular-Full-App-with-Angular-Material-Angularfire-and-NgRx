@@ -80,11 +80,18 @@ export class LocationDataService extends DefaultDataService<Location> {
 
       }
 
-      if ( locationChange.changes.ActiveDate instanceof Date)
+      if ( locationChange.changes.ActivateDate instanceof Date)
       {
-        location.ActiveDate=   `/Date(${locationChange.changes.ActiveDate!.getTime()}/`;
+        location.ActivateDate=   `/Date(${locationChange.changes.ActivateDate!.getTime()})/`;
 
       }
+
+      //hardcoded takeout
+     // location.ActivateDate ='/Date(1640197800000/'
+      location.PostalID=19232635
+     location.CityId=120132
+      location.StateId=0
+      location.ClientId='1132'
 
 
     const locUrl =

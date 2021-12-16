@@ -33,7 +33,7 @@ export class LocationContainerComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.locationId = '631535';
+    this.locationId = '629331';
 
     this.locationAdeptor.currentLocation$ = this.locationService.collection$.pipe(
       select(selectLocationlById(this.locationId)))
