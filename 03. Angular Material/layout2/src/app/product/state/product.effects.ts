@@ -16,10 +16,10 @@ constructor(
 ){}
 
   loadProducts$ = createEffect(() => {
-    return this.actions$.pipe(
+     return this.actions$.pipe(
         ofType(ProductActions.loadAllProducts),
-        concatMap((action)=>{this.productService.GetProductByClientID(1132)}),
-        map((product)=>allProductsLoaded({product}))
+        concatMap((action)=>{return this.productService.GetProductByClientID(1132)}),
+        map((products)=>allProductsLoaded({products}))
         /** An EMPTY observable only emits completion. Replace with your own observable stream */
         );
   });
