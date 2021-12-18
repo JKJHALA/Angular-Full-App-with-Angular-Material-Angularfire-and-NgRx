@@ -68,6 +68,10 @@ addEditClick(){
    // this.router.navigateByUrl('/addEditlocation');
 }
 
+openProducts(){
+  this.router.navigate(['/product']);
+}
+
   AddLocationClick() {
     this.currentPage.next(this.currentPage.value+1)
 
