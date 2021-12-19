@@ -47,6 +47,13 @@ export const productReducer= createReducer(
 );
 
 
+//use selector functions from adeptor
+//there are 4 such functions
+export const{
+  selectAll
+} =adapter.getSelectors();
+
+
 //export const reducers: ActionReducerMap<State> = {
 
 //};
