@@ -13,7 +13,7 @@ export interface Location {
   StateId?: number;
   StateName?: string;
   LocationType?: LocationType;
-  LocationTypeId?: number;
+  LocationTypeID?: number;
   Name?: string;
   Address1?: string;
   Address2?: string;

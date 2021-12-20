@@ -59,10 +59,15 @@ export class LocationsComponent implements OnInit {
 
     })
 
-    this.filteredLocation$ = this.store.pipe(
-      select(selectOriginLocations('XXX AMETEK')))
 
-      this.filteredLocation$.subscribe(l=>console.log('in filtered sub :',l))
+    //instead of hardcoded , get value from texbox
+    //if count is less then say 10 we can trigger service call
+    //also need to maintain falg if alreay searched for givent text .. so we don;t make infinite no of call
+    //in some filter we may have 2-3 records only
+    //this is for autocomplete filters
+    this.filteredLocation$ = this.store.pipe(
+      select(selectOriginLocations('XXX A')))
+
 
 
 
