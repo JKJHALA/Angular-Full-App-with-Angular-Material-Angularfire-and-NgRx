@@ -6,6 +6,7 @@ import { BehaviorSubject, combineLatest,  Observable, of } from 'rxjs';
 import { LocationEntityService } from '../services/location-entity.service';
 import {Location} from '../model/location'
 import { LocationAdeptor } from '../locationAdeptor';
+import { selectOriginLocations } from '../location-selector';
 
 
 @Component({
@@ -23,6 +24,9 @@ export class LocationsComponent implements OnInit {
 
     locations$:Observable<Location[]>=of([])
 
+    filteredLocation$:Observable<Location[]>=of([])
+
+
     displayedColumns: string[] = ['LocationId', 'Name'];
 
     currentPage:BehaviorSubject<number>=new BehaviorSubject(1)
@@ -37,17 +41,30 @@ export class LocationsComponent implements OnInit {
     this.locations$=   this.locationService.entities$
 
 
+
+
     combineLatest([this.locationService.count$,this.currentPage]).subscribe(
       ([c,n]: any)=>
     {
-      if( !( Number(c) >0  && n===1)) //don't subscribe on returning back or use router state
+        //this will send another all when record is updated so do wroaround it is not good
+      if( !( Number(c) >0  && n===1) && 10*n>(c+1)) //don't subscribe on returning back or use router state
       {
+
              //bulid query in seprate helper/utility class/service
       this.locationService.getWithQuery(`clientID=1132&pageNo=${n}&recordCount=10`)
+
+
       }
 
 
     })
+
+    this.filteredLocation$ = this.store.pipe(
+      select(selectOriginLocations('XXX AMETEK')))
+
+      this.filteredLocation$.subscribe(l=>console.log('in filtered sub :',l))
+
+
 
     //save subccription and on deactivate unsubscribe
     // this.currentPage.subscribe(n=>(
