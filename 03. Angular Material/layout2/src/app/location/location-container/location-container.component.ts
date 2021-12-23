@@ -47,8 +47,6 @@ export class LocationContainerComponent implements OnInit {
     console.log("in saveLocation")
     if (this.locationAdeptor.location != undefined) {//can add validtion
 
-
-
       this.locationService.update(this.locationAdeptor.location)
       this.router.navigateByUrl('/location')
     }

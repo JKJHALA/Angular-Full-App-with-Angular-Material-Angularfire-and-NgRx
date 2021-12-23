@@ -25,12 +25,7 @@ export class LocationDataService extends DefaultDataService<Location> {
 
   override getAll(): Observable<Location[]> {
 
-
-    //   https://devwtcustomer.tmssaas.com/Services/Wcf/LocationService.svc/json/GetLocationsByClient
-    // const locUrl = this.domainUrl + 'Services/MasLocationService.svc/json/GetLocationByType';
-
-    const locUrl =
-      this.domainUrl +
+    const locUrl = this.domainUrl +
       'Services/Wcf/LocationService.svc/json/GetPagedLocationForClient';
 
     let params = new HttpParams();

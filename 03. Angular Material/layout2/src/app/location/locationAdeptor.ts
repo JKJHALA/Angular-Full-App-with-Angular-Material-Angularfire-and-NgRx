@@ -19,7 +19,7 @@ public get location():Location | undefined{
 
    //if needed do some validation
    this.editedLocation=l;
-  console.log(this.editedLocation)
+
  }
 
 

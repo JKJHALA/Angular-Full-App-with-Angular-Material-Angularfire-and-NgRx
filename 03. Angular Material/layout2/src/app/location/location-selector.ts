@@ -19,7 +19,6 @@ export const selectOriginLocations = (matchString: string) =>
 
     (locations) => {
       return locations.filter((l) => {
-
         return l.LocationTypeID === 1 && l.Name?.startsWith(matchString);
       });
     }
