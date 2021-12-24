@@ -11,7 +11,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-//import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -19,7 +18,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
-//import { MatSort } from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
    imports: [MatButtonModule,
@@ -34,7 +34,6 @@ import { MatTableModule } from '@angular/material/table';
       MatExpansionModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      //MatMomentDateModule,
       MatCheckboxModule,
       MatSelectModule,
       MatRadioModule,
@@ -42,8 +41,8 @@ import { MatTableModule } from '@angular/material/table';
       MatTooltipModule,
       MatMenuModule,
       MatTableModule,
-      //MatSortModule,
-      //MatSort
+      MatSortModule,
+      MatPaginatorModule
    ],
    exports: [MatButtonModule,
       MatInputModule,
@@ -57,7 +56,6 @@ import { MatTableModule } from '@angular/material/table';
       MatExpansionModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      //MatMomentDateModule,
       MatCheckboxModule,
       MatSelectModule,
       MatRadioModule,
@@ -65,8 +63,8 @@ import { MatTableModule } from '@angular/material/table';
       MatTooltipModule,
       MatMenuModule,
       MatTableModule,
-      //MatSortModule,
-      //MatSort
+      MatSortModule,
+      MatPaginatorModule
    ]
 })
 export class MaterialModule { }

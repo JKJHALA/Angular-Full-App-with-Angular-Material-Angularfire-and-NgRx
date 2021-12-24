@@ -1,0 +1,85 @@
+<mat-card>
+
+  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="75px">
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Description">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Pallet">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="NMFC">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-select name="locationtype" placeholder="Class">
+          <mat-option *ngFor="let class of classList" [value]="class">
+            {{class}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Commodity">
+      </mat-form-field>
+
+      <div class="mat-form-field-infix ng-tns-c97-8">
+        <mat-checkbox color="primary">Hazmat</mat-checkbox>
+      </div>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Hazmat Contact">
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="5px">
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Weight">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Pieces">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Length">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Height">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <input type="text" matInput placeholder="Width">
+      </mat-form-field>
+
+      <div class="mat-form-field-infix ng-tns-c97-8">
+        <mat-checkbox color="primary">Active</mat-checkbox>
+      </div>
+
+      <div fxLayout="row">
+        <mat-radio-group aria-label="Select an option" fxLayoutGap="25px" color="primary" style="margin-top: 15px;">
+          <mat-radio-button value="Approve">Approve
+          </mat-radio-button>
+          <mat-radio-button value="UnApprove">UnApprove
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="25px">
+        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button color="primary">Save</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</mat-card>

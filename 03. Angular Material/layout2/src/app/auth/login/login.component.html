@@ -3,11 +3,11 @@
 <div class="control"  fxLayout="column" fxLayoutAlign="center center"  [formGroup]="loginFG"> -->
 
 
-
+<div fxFill fxLayoutAlign="center center">
   <mat-card class="login-page">
     <mat-card-title>SAAS Login</mat-card-title>
 
-    <mat-card-content>
+    <mat-card-content fxLayoutAlign="center center">
       <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginFG" (ngSubmit)="DoLogin()" fxLayoutGap="5px">
         <mat-form-field>
           <input matInput placeholder="Login" formControlName="loginName">
@@ -44,3 +44,5 @@
       </form>
     </mat-card-content>
   </mat-card>
+</div>
+  

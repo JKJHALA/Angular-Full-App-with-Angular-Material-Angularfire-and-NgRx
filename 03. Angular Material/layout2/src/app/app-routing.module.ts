@@ -12,6 +12,7 @@ import { ProductComponent } from './product/products/product.component';
 import { LocationComponent } from './location/locations/location.component';
 import { LocationEntryPanelComponent } from './location/location-entry-panel/location-entry-panel.component';
 import { ReportsComponent } from './report/reports/reports.component';
+import { ProductEntryPanelComponent } from './product/ProductEntryPanel/ProductEntryPanel.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'location', component: LocationComponent },
   { path: 'reports', component: ReportsComponent },
-  { path: 'locationEntryPanel', component: LocationEntryPanelComponent }
+  { path: 'locationEntryPanel', component: LocationEntryPanelComponent },
+  { path: 'productEntryPanel', component: ProductEntryPanelComponent }
 ];
 
 @NgModule({
