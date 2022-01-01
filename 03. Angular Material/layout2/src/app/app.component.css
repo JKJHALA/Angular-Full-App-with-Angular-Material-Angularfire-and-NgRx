@@ -17,3 +17,8 @@
 .mat-toolbar-row, .mat-toolbar-single-row{
   padding: 0 0;
 }
+
+mat-sidenav
+{
+  width: 14.95%;
+}

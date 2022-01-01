@@ -1,8 +1,8 @@
-<div fxLayout="row" fxLayoutAlign="start start">
+<!-- <div fxLayout="row" fxLayoutAlign="start start">
   <div fxFlex><img fxFlex="0 1 auto" src="/assets/images/logo.jpg" alt="Logo"></div>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="center center" fxFlex>
+<div fxLayout="column" fxLayoutAlign="center center">
   <div>CAP LOGISTICS</div>
   <div>LESS THAN TRUCK LOAD SOLUTIONS</div>
 </div>
@@ -34,5 +34,51 @@
       </button>
     </mat-menu>
 
+  </div>
+</div> -->
+
+<div fxFlex>
+  <div fxLayout="row" fxFlex="12.75%">
+    <!-- <div fxFlex><img fxFlex="0 1 auto" src="/assets/images/logo.jpg" alt="Logo"></div> -->
+    <div fxFlex>
+      <img fxFlex="0 1 auto" src="{{clientLogoUrl}}{{applicationStateService.clientID$ | async}}&AuthTicket={{applicationStateService.userTicket$ | async}}" alt="Logo" width="188" height="64">
+    </div>
+  </div>
+
+  <div fxLayout="column" fxFlex fxLayoutAlign="center center" *ngIf="(applicationStateService.brandInfo$ | async) || []; let brandInfo">
+    <div>{{brandInfo[0]?.BrandName}}</div>
+    <div>{{brandInfo[0]?.BannerText}}</div>
+  </div>
+
+  <div fxLayout="column" fxFlex="15%" fxLayoutAlign="end start" *ngIf="(applicationStateService.clientDefaults$ | async) || []; let clientDefault">
+    <div style="font: 500 13px/20px Roboto, Helvetica Neue, sans-serif;">Phone : {{clientDefault[0]?.ContactPhone}}</div>
+    <div style="font: 500 13px/20px Roboto, Helvetica Neue, sans-serif;">Fax : {{clientDefault[0]?.ContactFax}}</div>
+    <div style="font: 500 13px/20px Roboto, Helvetica Neue, sans-serif;">Email : {{clientDefault[0]?.ContactEmail}}</div>
+  </div>
+
+  <div class="userInfo" fxFlex="5%" fxLayoutAlign="center center">
+    <div fxFlexAlign="center center">
+      <ng-container *ngIf="applicationStateService.username$ | async ; let t">
+        <button mat-mini-fab [matTooltip]="t"  [matMenuTriggerFor]="menu" [matTooltipPosition]="position.value"
+        color="warn" style="margin-top: 10px;">
+        <mat-icon>perm_identity</mat-icon>        
+      </button>      
+      </ng-container>     
+      <mat-menu #menu>
+        <button mat-menu-item>
+          <mat-icon>account_box</mat-icon>
+          <span>User Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>vpn_lock</mat-icon>
+          <span>Change Password</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+    </div>
   </div>
 </div>

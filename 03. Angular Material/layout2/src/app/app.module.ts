@@ -17,7 +17,16 @@ import { ShipmentTLModule } from './shipment-tl/shipment-tl.module';
 import { ProductModule } from './product/product.module';
 import { LocationModule } from './location/location.module';
 import { ReportModule } from './report/report.module';
-
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { metaReducers, reducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClient, HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
+import { AuthenticationService } from './auth/services/auth.service';
+import { AuthInterceptor } from './system-service/auth-interceptor';
+import { EntityDataModule } from '@ngrx/data';
+import { ApplicationStateService } from './shared/applicationStateService';
 
 @NgModule({
   declarations: [
@@ -40,12 +49,22 @@ import { ReportModule } from './report/report.module';
     ShipmentTLModule,
     ProductModule,
     LocationModule,    
-    ReportModule
+    ReportModule, 
+    StoreModule.forRoot(reducers, {metaReducers}), 
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    //EntityDataModule.forRoot({}),
+    HttpClientModule,
+    EffectsModule.forRoot([]),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    AuthenticationService,   
+    ApplicationStateService, 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

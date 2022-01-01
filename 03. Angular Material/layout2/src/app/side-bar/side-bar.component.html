@@ -1,85 +1,66 @@
-<!-- <div id="menu" fxLayout="column" fxLayoutGap="10px"  >
+<div fxLayout="column">
+  <div>
+    <form style="width: 100%; padding: 0 24px;" class="client-form" [formGroup]="clientsForm">
+      <mat-form-field class="matFormField" appearance="outline">
+        <input name="client" formControlName="client" type="text" matInput placeholder="Client Name"
+          style="color: #a1a2b6;" [matAutocomplete]="clientAutoComplete">
+        <mat-autocomplete #clientAutoComplete="matAutocomplete">          
+            <!-- <mat-option
+              *ngFor="let client1 of (applicationStateService.filteredClientAndSubClient$ | async) || []; let filterClient"
+              (onSelectionChange)="onChangeClient($event)" 
+              [value]="client1?.ClientName" 
+              style="font-size: 12px">
+              {{client1?.ClientName}}
+            </mat-option> -->
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
 
-<div fxLayout="column" fxLayoutAlign="space-around stretch" fxFlex="1 1 90vh">
-  <H3 fxFlex="1 1 auto">Menu Bar</H3>
+  </div>
+  <div>
+    <mat-nav-list>
+      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
+        <a [routerLink]="['rating']">
+          <mat-icon>attach_money</mat-icon>
+          <span class="nav-caption">Rating </span>
+        </a>
+      </mat-list-item>
 
-<div fxFlex >Home</div>
-<div fxFlex > Quote</div>
-<div fxFlex >Shipment</div>
-<div fxFlex >Reports</div>
+      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
+        <a [routerLink]="['shipment']">
+          <mat-icon>local_shipping</mat-icon>
+          <span class="nav-caption">Shipment </span>
+        </a>
+      </mat-list-item>
 
+      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
+        <a [routerLink]="['shipmentTL']">
+          <mat-icon>local_shipping</mat-icon>
+          <span class="nav-caption">Shipment TL</span>
+        </a>
+      </mat-list-item>
+
+      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
+        <a [routerLink]="['product']">
+          <mat-icon>ballot</mat-icon>
+          <span class="nav-caption">Product</span>
+        </a>
+      </mat-list-item>
+
+      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
+        <a [routerLink]="['location']">
+          <mat-icon>location_searching</mat-icon>
+          <span class="nav-caption">Location</span>
+        </a>
+      </mat-list-item>
+
+      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
+        <a [routerLink]="['reports']">
+          <mat-icon>print</mat-icon>
+          <span class="nav-caption">Reports </span>
+        </a>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </div>
 </div>
-
-</div> -->
-
-
-
-  <!-- <mat-list-item>
-    <!-- can use for loop on it-->
-
-  <!--<mat-icon>info</mat-icon>
-
-    <span class="nav-caption">Login</span>
-  </mat-list-item> -->
-
-  <!-- <mat-list-item>
-    <!-- can use for loop on it-->
-
-  <!--<mat-icon>account_circle</mat-icon>
-
-    <span class="nav-caption">Sign up</span>
-  </mat-list-item> -->
-
-      <mat-nav-list>
-        <mat-list-item>
-          <a href="/rating">
-            <!-- can use for loop on it-->
-            <mat-icon>attach_money</mat-icon>
-            <span class="nav-caption">Rating </span>
-          </a>
-        </mat-list-item>
-      
-        <mat-list-item>
-          <!-- can use for loop on it-->
-          <a href="/shipment">
-            <mat-icon>local_shipping</mat-icon>
-            <span class="nav-caption">Shipment </span>
-          </a>
-        </mat-list-item>
-      
-        <mat-list-item>
-          <a href="/shipmentTL">
-            <!-- can use for loop on it-->
-            <mat-icon>local_shipping</mat-icon>
-            <span class="nav-caption">Shipment TL</span>
-          </a>
-        </mat-list-item>
-      
-        <mat-list-item>
-          <a href="/product">
-            <!-- can use for loop on it-->
-            <mat-icon>ballot</mat-icon>
-            <span class="nav-caption">Product</span>
-          </a>
-        </mat-list-item>
-      
-        <mat-list-item>
-          <a href="/location">
-            <!-- can use for loop on it-->
-            <mat-icon>location_searching</mat-icon>
-            <span class="nav-caption">Location</span>
-          </a>
-        </mat-list-item>
-      
-        <mat-list-item>
-          <a href="/reports">
-            <!-- can use for loop on it-->
-            <mat-icon>print</mat-icon>
-            <span class="nav-caption">Reports </span>
-          </a>
-        </mat-list-item>
-      
-      </mat-nav-list>
-
- 
-
