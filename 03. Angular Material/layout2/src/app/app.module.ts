@@ -22,11 +22,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { metaReducers, reducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClient, HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from './auth/services/auth.service';
 import { AuthInterceptor } from './system-service/auth-interceptor';
-import { EntityDataModule } from '@ngrx/data';
 import { ApplicationStateService } from './shared/applicationStateService';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { ApplicationStateService } from './shared/applicationStateService';
     SignupComponent,
     TopBarComponent,
     SideBarComponent,
-    TpageComponent,    
+    TpageComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +48,9 @@ import { ApplicationStateService } from './shared/applicationStateService';
     ShipmentLTLModule,
     ShipmentTLModule,
     ProductModule,
-    LocationModule,    
-    ReportModule, 
-    StoreModule.forRoot(reducers, {metaReducers}), 
+    LocationModule,
+    ReportModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     //EntityDataModule.forRoot({}),
     HttpClientModule,
@@ -61,9 +61,11 @@ import { ApplicationStateService } from './shared/applicationStateService';
   ],
   providers: [
     HttpClient,
-    AuthenticationService,   
-    ApplicationStateService, 
+    AuthenticationService,
+    ApplicationStateService,
+
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

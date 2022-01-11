@@ -6,8 +6,8 @@ import { ClientMasterMiniModel } from '../auth/Model/ClientMasterMiniModel';
 import { combineLatest, debounceTime, distinctUntilChanged, filter, map, Observable, of, pipe, startWith, switchMap, tap } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApplicationStateService } from '../shared/applicationStateService';
-import { LoadClientAndSubClientByFilterString } from '../auth/state/auth.actions';
-import { clientID } from '../auth/state/auth.selectors';
+import { LoadApplicationMenu, LoadBrandInfo, LoadClientAndSubClientByFilterString, LoadClientDefault, LoadCorporateClientDefault, LoadLoggedClientDetail } from '../auth/state/auth.actions';
+
 
 @Component({
   selector: 'app-side-bar',
@@ -17,10 +17,12 @@ import { clientID } from '../auth/state/auth.selectors';
 
 export class SideBarComponent implements OnInit {
   @Output() sidenavOutput: EventEmitter<string> = new EventEmitter();
-  clientname: string = "";
+
   selectedClient$: Observable<string | undefined> = of('');
   filteredOptions$: Observable<ClientMasterMiniModel[]> = of();
-  clientsForUser$: Observable<ClientMasterMiniModel[]> = of();  
+  clientsForUser$: Observable<ClientMasterMiniModel[]> = of();
+  userID: number = 0;
+
 
   clientsForm = new FormGroup({
     client: new FormControl('', null)
@@ -44,21 +46,25 @@ export class SideBarComponent implements OnInit {
     // });
 
     this.applicationStateService.selectedClient$.subscribe(client => {
-       if (!!client) this.clientsForm.get('client')?.setValue(client.ClientName)
+      if (!!client) this.clientsForm.get('client')?.setValue(client.ClientName)
+    })
+
+    this.applicationStateService.userID$.subscribe(usr => {
+      if (!!usr) this.userID = usr
     })
 
     this.clientsForm.get('client')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
-      filter((searchStr:string) =>searchStr.length >= 3),
+      filter((searchStr: string) => searchStr.length >= 3),
       distinctUntilChanged()
     ).subscribe(val => { this.getClientAndSubClientsByFilterName(val) });
-   
+
     //this.applicationStateService.filteredClientAndSubClient$.subscribe(a => {console.log(a)});
     //this.filteredOptions$ = getCliets$;
   }
 
-  private getClientAndSubClientsByFilterName(searchText: string) {   
+  private getClientAndSubClientsByFilterName(searchText: string) {
     this.store.dispatch(
       LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 })
     );
@@ -66,8 +72,28 @@ export class SideBarComponent implements OnInit {
 
 
 
-  async onChangeClient(event: any) {
-    //this.clientsForm.get('client')?.setValue(event.source.value);
+  async onChangeClient(event: ClientMasterMiniModel) {
+    this.clientsForm.get('client')?.setValue(event.ClientName);
+
+    this.store.dispatch(
+      LoadLoggedClientDetail({ clientID: (event.ClientID !== null && event.ClientID !== undefined ? event.ClientID : 0) })
+    );
+
+    this.store.dispatch(
+      LoadBrandInfo({ clientID: (event.ClientID !== null && event.ClientID !== undefined ? event.ClientID : 0) })
+    );
+
+    this.store.dispatch(
+      LoadClientDefault({ clientID: (event.ClientID !== null && event.ClientID !== undefined ? event.ClientID : 0) })
+    );
+
+    this.store.dispatch(
+      LoadCorporateClientDefault({ clientID: (event.ClientID !== null && event.ClientID !== undefined ? event.ClientID : 0) })
+    );
+
+    this.store.dispatch(
+      LoadApplicationMenu({ userID: this.userID, clientID: (event.ClientID !== null && event.ClientID !== undefined ? event.ClientID : 0) })
+    );
   }
 
   closeSideNavEmit() {
@@ -75,8 +101,4 @@ export class SideBarComponent implements OnInit {
   }
 }
 
-const getCliets$: Observable<ClientMasterMiniModel[]> = of([
-  { ClientID: 1132, ClientName: "Dev testing"},
-  { ClientID: 1133, ClientName: "test subclient" },
-  { ClientID: 1134, ClientName: "test subclient 2" }
-]);
+

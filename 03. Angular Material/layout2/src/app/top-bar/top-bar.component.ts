@@ -6,6 +6,7 @@ import { userName } from '../auth/state/auth.selectors';
 import { AuthState } from '../auth/reducers';
 import { ApplicationStateService } from '../shared/applicationStateService';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
@@ -14,17 +15,20 @@ import { Observable, of } from 'rxjs';
 })
 export class TopBarComponent implements OnInit {
 
-  public positionOptions: TooltipPosition[] = ['left'];  
-  public position = new FormControl(this.positionOptions[0]); 
+  public positionOptions: TooltipPosition[] = ['left'];
+  public position = new FormControl(this.positionOptions[0]);
   clientLogoUrl = 'https://devwtcustomer.tmssaas.com/DownloadUserLogo.ashx?ClientID=';
-  constructor(private store: Store<AuthState>,public applicationStateService:ApplicationStateService) 
-  {
+  constructor(private store: Store<AuthState>, public applicationStateService: ApplicationStateService, private router: Router) {
 
 
-   }
+  }
 
   ngOnInit(): void {
-    
+
+  }
+
+  logOutClick() {    
+      this.router.navigate(['login']);
   }
 
 }

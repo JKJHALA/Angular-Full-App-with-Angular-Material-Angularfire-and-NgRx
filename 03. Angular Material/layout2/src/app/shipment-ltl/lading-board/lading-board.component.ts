@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
 import { BOLHDR } from '../model/BOLHDR';
 import { ShipmentLTLState } from '../reducers';
 import { loadAllShipmentsLTL } from '../state/shipmentLTL.action';
@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ApplicationStateService } from 'src/app/shared/applicationStateService';
-import { async } from '@angular/core/testing';
+
 
 @Component({
   selector: 'app-lading-board',
@@ -27,14 +27,14 @@ export class LadingBoardComponent implements OnInit {
   @ViewChild(MatPaginator) shipmentLTLpaginator: MatPaginator | any;
   @ViewChild(MatSort) shipmentLTLsort: MatSort | any;
   Selection = new SelectionModel<BOLHDR>(false, []);
-  clientID: number;
+  
 
 
   constructor(private store: Store<ShipmentLTLState>,
     private router: Router,
     private route: ActivatedRoute,
     private applicationStateService: ApplicationStateService) {
-      this.clientID = 0;
+      
      }
 
   
@@ -46,10 +46,12 @@ export class LadingBoardComponent implements OnInit {
   ngOnInit(): void {
 
     this.applicationStateService.clientID$.subscribe(cli => {
-      this.clientID = (cli === undefined ? 0 : cli)
+      //this.clientID = (cli === undefined ? 0 : cli)
+      if(cli !== undefined && cli !== 0){
+        this.store.dispatch(loadAllShipmentsLTL({clientID:cli=== undefined ? 0 : cli}))
+      }
     });
-
-    this.store.dispatch(loadAllShipmentsLTL({clientID:this.clientID}))
+   
 
     this.ShipmentLTLs$ = this.store.pipe(
       select(selectAllShipmentLTLs)

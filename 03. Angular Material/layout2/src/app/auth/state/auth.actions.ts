@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { ApplicationMenuModel } from "../Model/ApplicationMenuModel";
 import { BrandInfoModel } from "../Model/BrandInfoModel";
 import { ClientDefaultsModel } from "../Model/ClientDefaultsModel";
 import { ClientMasterMiniModel } from "../Model/ClientMasterMiniModel";
@@ -48,6 +49,14 @@ export const LoadCorporateClientDefault = createAction('[Login Form] Corporate C
 export const CorporateClientDefaultLoaded = createAction(
   "[auth Effects] Corporate Client Default Loaded",
   props<{ corporateClientDefaultsModel: ClientDefaultsModel[] }>()
+);
+
+//Load Application Menus
+export const LoadApplicationMenu = createAction('[Sidebar Component] Application Menu Load', 
+props<{userID:number,clientID:number}>());
+
+export const ApplicationMenuLoaded = createAction('[Sidebar Component] Application Menu Loaded',
+props<{ applicationMenus:ApplicationMenuModel[]}>()
 );
 
 //Load Clients by Filter String

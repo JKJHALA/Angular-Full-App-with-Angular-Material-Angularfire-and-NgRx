@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 //import { AppModule } from 'app/app.module';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { ApplicationMenuModel } from '../Model/ApplicationMenuModel';
 import { BrandInfoModel } from '../Model/BrandInfoModel';
 import { ClientDefaultsModel } from '../Model/ClientDefaultsModel';
 import { ClientMasterMiniModel } from '../Model/ClientMasterMiniModel';
 import { SaasToken } from '../Model/ticket';
 import { UserProfile } from '../Model/userProfile';
+import { clientID, userName } from '../state/auth.selectors';
 
 
 @Injectable()
@@ -117,10 +119,26 @@ export class AuthenticationService {
       map((x: any) => {
         let fliteredClientResult: ClientMasterMiniModel[];
         
-        fliteredClientResult = { ...x.body.GetClientAndSubClientByFilterStringResult };
+        fliteredClientResult = x.body.GetClientAndSubClientByFilterStringResult ;
         
         return fliteredClientResult;
       }))
+  }
+
+  public getApplicationMenus(UserID : number,clientID:number):Observable<ApplicationMenuModel[]>
+  {
+    //const url = this.domainUrl + '/Services/Wcf/AuthenticateUserForPageService.svc/Json/GetGroupApplicationMenuByUserID?UserID='+ UserID +'&clientID=' + clientID
+    const url = this.domainUrl + '/Services/Wcf/AuthenticateUserForPageService.svc/Json/GetApplicationMenuByUserIDAndClientID?userID='+ UserID +'&clientID=' + clientID
+
+    return this.http.get<ApplicationMenuModel[]>(url, { observe: 'response' })
+      .pipe(
+        map((x: any) => {
+          let applicationMenus: ApplicationMenuModel[];
+
+          applicationMenus = x.body.GetApplicationMenuByUserIDAndClientIDResult;
+
+          return applicationMenus;
+        }))
   }
 
   public refreshToken(): Observable<SaasToken> {

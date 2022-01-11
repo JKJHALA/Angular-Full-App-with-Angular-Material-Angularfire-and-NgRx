@@ -13,6 +13,7 @@ import { LocationComponent } from './location/locations/location.component';
 import { LocationEntryPanelComponent } from './location/location-entry-panel/location-entry-panel.component';
 import { ReportsComponent } from './report/reports/reports.component';
 import { ProductEntryPanelComponent } from './product/ProductEntryPanel/ProductEntryPanel.component';
+import { ShipmentLTLResolver } from './resolvers/shipmentLTLResolver';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

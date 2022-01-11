@@ -12,9 +12,14 @@ export const userTicket = createSelector(
 
 );
 
-export const clientID = createSelector(
+export const LoggedClientID = createSelector(
   selectAuthState,
   (auth) => auth.userProfile.ClientID
+);
+
+export const clientID = createSelector(
+  selectAuthState,
+  (auth) => auth.selectedClient.ClientID
 );
 
 export const isLoggedIn = createSelector(
@@ -60,5 +65,10 @@ export const corporateClientDefaults=createSelector(
 export const filteredClients = createSelector(
   selectAuthState,
   (auth)=>auth.clientAndSubclients
+);
+
+export const applicationMenus=createSelector(
+  selectAuthState,  
+  (auth) => auth.applicationMenus
 );
 

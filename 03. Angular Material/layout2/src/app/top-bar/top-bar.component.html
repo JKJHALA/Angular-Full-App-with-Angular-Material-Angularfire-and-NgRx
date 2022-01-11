@@ -40,8 +40,8 @@
 <div fxFlex>
   <div fxLayout="row" fxFlex="12.75%">
     <!-- <div fxFlex><img fxFlex="0 1 auto" src="/assets/images/logo.jpg" alt="Logo"></div> -->
-    <div fxFlex>
-      <img fxFlex="0 1 auto" src="{{clientLogoUrl}}{{applicationStateService.clientID$ | async}}&AuthTicket={{applicationStateService.userTicket$ | async}}" alt="Logo" width="188" height="64">
+    <div fxFlex style="background-color:white;">
+      <img fxFlex="0 1 auto" src="{{clientLogoUrl}}{{applicationStateService.clientID$ | async}}&AuthTicket={{applicationStateService.userTicket$ | async}}"  width="188" height="64">
     </div>
   </div>
 
@@ -74,8 +74,10 @@
           <span>Change Password</span>
         </button>
         <button mat-menu-item>
-          <mat-icon>power_settings_new</mat-icon>
-          <span>Logout</span>
+          <a href="login" style="text-decoration: none;color: inherit;">
+            <mat-icon>power_settings_new</mat-icon>
+            <span>Logout</span>
+          </a>          
         </button>
       </mat-menu>
 

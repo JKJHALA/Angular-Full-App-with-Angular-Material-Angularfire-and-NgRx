@@ -18,6 +18,7 @@ import { ClientDefaultsModel } from '../Model/ClientDefaultsModel';
 import { state } from '@angular/animations';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { adapter } from 'src/app/shipment-ltl/reducers';
+import { ApplicationMenuModel } from '../Model/ApplicationMenuModel';
 
 export const authFeatureKey = 'auth';
 
@@ -40,6 +41,9 @@ export interface AuthState {
   clientAndSubclients:ClientMasterMiniModel[];
   isClientandSubClientLoaded:boolean;
 
+  applicationMenus:ApplicationMenuModel[];
+  isApplicationMenuLoaded:boolean;
+
 }
 
 export const initialAuthState: AuthState = {
@@ -60,6 +64,9 @@ export const initialAuthState: AuthState = {
 
   clientAndSubclients:[],
   isClientandSubClientLoaded:false,
+
+  applicationMenus:[],
+  isApplicationMenuLoaded:false,
 }
 
 
@@ -80,8 +87,11 @@ export const authReducer = createReducer(
   on(AuthActions.CorporateClientDefaultLoaded, (state, action) => {
     return { ...state, CorporateClientDefaults: action.corporateClientDefaultsModel, IsCorporateDefaultsLoaded: true }
   }),
-  on(AuthActions.ClientAndSubClientByFilterStringLoaded,(state,action) => {
+  on(AuthActions.ClientAndSubClientByFilterStringLoaded,(state,action) => {    
     return{...state, clientAndSubclients : action.filteredClients,isClientandSubClientLoaded:true}
+  }),
+  on(AuthActions.ApplicationMenuLoaded,(state,action) => {    
+    return{...state, applicationMenus : action.applicationMenus,isApplicationMenuLoaded:true}
   }),
 )
 

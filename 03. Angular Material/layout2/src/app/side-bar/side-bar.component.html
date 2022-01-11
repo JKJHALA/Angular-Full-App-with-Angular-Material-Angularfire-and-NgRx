@@ -1,17 +1,17 @@
 <div fxLayout="column">
   <div>
-    <form style="width: 100%; padding: 0 24px;" class="client-form" [formGroup]="clientsForm">
+    <form style="width: 95%; padding: 0 5px;" class="client-form" [formGroup]="clientsForm">
       <mat-form-field class="matFormField" appearance="outline">
         <input name="client" formControlName="client" type="text" matInput placeholder="Client Name"
           style="color: #a1a2b6;" [matAutocomplete]="clientAutoComplete">
         <mat-autocomplete #clientAutoComplete="matAutocomplete">          
-            <!-- <mat-option
+            <mat-option
               *ngFor="let client1 of (applicationStateService.filteredClientAndSubClient$ | async) || []; let filterClient"
-              (onSelectionChange)="onChangeClient($event)" 
+              (onSelectionChange)="onChangeClient(client1)" 
               [value]="client1?.ClientName" 
               style="font-size: 12px">
               {{client1?.ClientName}}
-            </mat-option> -->
+            </mat-option>
         </mat-autocomplete>
       </mat-form-field>
     </form>
@@ -19,14 +19,14 @@
   </div>
   <div>
     <mat-nav-list>
-      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
-        <a [routerLink]="['rating']">
-          <mat-icon>attach_money</mat-icon>
-          <span class="nav-caption">Rating </span>
+      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']" *ngFor="let menu of (applicationStateService.applicationMenus$ | async) || []">
+        <a [routerLink]="[menu.RoutingURL]">
+          <mat-icon>{{menu?.MatMenuIcon}}</mat-icon>
+          <span class="nav-caption">{{menu?.WebMenuCaption}} </span>
         </a>
       </mat-list-item>
 
-      <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
+      <!-- <mat-list-item (click)="closeSideNavEmit()" [routerLinkActive]="['is-active']">
         <a [routerLink]="['shipment']">
           <mat-icon>local_shipping</mat-icon>
           <span class="nav-caption">Shipment </span>
@@ -59,7 +59,7 @@
           <mat-icon>print</mat-icon>
           <span class="nav-caption">Reports </span>
         </a>
-      </mat-list-item>
+      </mat-list-item> -->
 
     </mat-nav-list>
   </div>
