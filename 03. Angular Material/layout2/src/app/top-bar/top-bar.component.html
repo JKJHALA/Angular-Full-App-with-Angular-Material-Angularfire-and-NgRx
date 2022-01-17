@@ -38,7 +38,7 @@
 </div> -->
 
 <div fxFlex>
-  <div fxLayout="row" fxFlex="12.75%">
+  <div fxLayout="row" fxFlex="12.50%">
     <!-- <div fxFlex><img fxFlex="0 1 auto" src="/assets/images/logo.jpg" alt="Logo"></div> -->
     <div fxFlex style="background-color:white;">
       <img fxFlex="0 1 auto" src="{{clientLogoUrl}}{{applicationStateService.clientID$ | async}}&AuthTicket={{applicationStateService.userTicket$ | async}}"  width="188" height="64">
@@ -58,9 +58,9 @@
 
   <div class="userInfo" fxFlex="5%" fxLayoutAlign="center center">
     <div fxFlexAlign="center center">
-      <ng-container *ngIf="applicationStateService.username$ | async ; let t">
-        <button mat-mini-fab [matTooltip]="t"  [matMenuTriggerFor]="menu" [matTooltipPosition]="position.value"
-        color="warn" style="margin-top: 10px;">
+      <ng-container *ngIf="applicationStateService.username$ | async ; let uName">
+        <button mat-mini-fab [matTooltip]="uName"  [matMenuTriggerFor]="menu" [matTooltipPosition]="position.value"
+        color="warn" style="margin-top: 10px;background-color: #D3D0CBFF;">
         <mat-icon>perm_identity</mat-icon>        
       </button>      
       </ng-container>     

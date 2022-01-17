@@ -9,3 +9,11 @@ table {
 .mat-row.highlighted {
   background: rgb(201, 201, 201);
 }
+
+th{
+  color: #2E5266FF;
+}
+
+.mat-row .mat-cell {
+  font-size: 12px;
+}

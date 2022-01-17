@@ -5,3 +5,11 @@ table {
   .highlight{
     background: #808080;
   }
+
+  th{
+    color: #2E5266FF;
+}
+
+.mat-row .mat-cell {
+  font-size: 12px;
+}

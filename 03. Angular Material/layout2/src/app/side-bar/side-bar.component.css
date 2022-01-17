@@ -13,6 +13,7 @@ ul{
 }
 
 .is-active {
-  background-color:#6e8485;  
+  /* background-color:#6e8485;   */
+  background-color:#2E5266FF;
   color: white;
 }

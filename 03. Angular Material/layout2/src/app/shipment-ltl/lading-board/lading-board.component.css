@@ -2,12 +2,11 @@
     font-size: 12px;
 }
 
-mat-toolbar
-{
-    height: 50px;
-}
-
 mat-paginator
 {
     height: 45px;
+}
+
+th{
+    color: #2E5266FF;
 }

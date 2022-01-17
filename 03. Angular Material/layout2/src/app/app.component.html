@@ -46,8 +46,8 @@ gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
 </div> -->
 
 
-<mat-toolbar color="primary" FxFlex FxFlexLayout *ngIf="applicationStateServer.isLoggedIn$ | async">  
-  <div fxShow="true" fxHide="false">
+<mat-toolbar style="background-color: #2E5266FF;" color="primary" FxFlex FxFlexLayout *ngIf="applicationStateServer.isLoggedIn$ | async">  
+  <div fxShow="true" fxHide="false" fxFlex="3%">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -65,8 +65,8 @@ gdColumns="0.1fr 1fr" gdGap="10px" gdRows="auto 1fr" class="grid" >
       <app-side-bar></app-side-bar>
     </div>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <div style="margin: 7px;" FxLayout="column" fxFlex fxFill>
+  <mat-sidenav-content fxFlex>
+    <div style="margin: 7px;" fxLayout="column" fxFlex fxFill>
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
