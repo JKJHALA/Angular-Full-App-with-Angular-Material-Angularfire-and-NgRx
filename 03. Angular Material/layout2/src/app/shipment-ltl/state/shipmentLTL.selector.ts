@@ -2,6 +2,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { map, of, switchMap, withLatestFrom } from 'rxjs';
 import { AuthState } from 'src/app/auth/reducers';
+import { selectedClient } from 'src/app/auth/state/auth.selectors';
 import { ShipmentLTLState } from '../reducers'
 import * as fromShipmentltl from '../reducers/index'
 
@@ -30,17 +31,20 @@ export const SelectedClient = createSelector(
     //shipments => shipments    
 );
 
-// export const selectShipmentByClientID = createSelector(
-//   selectShipmentLTLsState,
-//   (s) => {
-//     of(fromShipmentltl.selectAll).
+export const selectShipmentByClientID = createSelector(
+  selectShipmentLTLsState,
+  SelectedClient,
+  map((shipment,client):(BOLHDR[],ClientMasterMiniModel) => shipment.filter(a => a.ClientId == SelectedClient.ClientID))
+
+    
+    // of(fromShipmentltl.selectAll).
 //       pipe
 //       (
 //         withLatestFrom(SelectedClient),
-//         map((a,b) => {a.ClientID === b})
+//         map((a,b) => { === b})
 //       )      
-//  }
-//);
+ }
+);
  
 
   //(shipments => shipments.filter(val => val.ClientId == clientID)) 

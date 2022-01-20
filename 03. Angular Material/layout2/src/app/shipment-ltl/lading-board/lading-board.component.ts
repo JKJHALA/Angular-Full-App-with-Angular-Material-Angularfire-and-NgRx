@@ -54,9 +54,9 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
         this.changedClientID = cli;
 
         this.ShipmentLTLs$ = this.store.pipe(
-          select(selectShipmentByClientID(cli)) 
+          select(selectAllShipmentLTLs) 
         )
-        //.pipe(map(a => {return a.filter(val => val.ClientId === cli)}))
+        .pipe(map(a => {return a.filter(val => val.ClientId === cli)}))
 
 
         this.ShipmentLTLs$.subscribe(bol => {
@@ -96,9 +96,9 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
     // )
 
     this.ShipmentLTLs$ = this.store.pipe(
-      select(selectShipmentByClientID(this.changedClientID)) 
+      select(selectAllShipmentLTLs) 
     )
-
+    .pipe(map(a => {return a.filter(val => val.ClientId === this.changedClientID)}))
 
 
     this.ShipmentLTLs$.subscribe(a => {
