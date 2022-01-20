@@ -14,7 +14,8 @@ import { clientID, userName } from '../state/auth.selectors';
 
 @Injectable()
 export class AuthenticationService {
-  domainUrl: string = "https://devwtcustomer.tmssaas.com/";
+  domainUrl: string = "https://devcustomer.tmssaas.com/";
+  // domainUrl: string = "http://localhost:1352/";
   constructor(private http: HttpClient) { }
 
   public doLogin(userName: string, password: string, userType: string): Observable<UserProfile> {

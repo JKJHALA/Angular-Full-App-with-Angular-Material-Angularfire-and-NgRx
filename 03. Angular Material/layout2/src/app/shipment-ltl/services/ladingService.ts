@@ -7,7 +7,8 @@ import { BOLHDR } from '../model/BOLHDR'
 @Injectable()
 export class LadingService {
 
-    domainUrl: string = "https://devwtcustomer.tmssaas.com/";
+    domainUrl: string = "https://devcustomer.tmssaas.com/";
+    // domainUrl: string = "http://localhost:1352/";
     constructor(private http: HttpClient) { }
 
     GetPagedBOLHDRsFromOpenStatusPublic(clientID: number): Observable<BOLHDR[]> {

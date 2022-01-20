@@ -1,43 +1,45 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable, of, pipe } from 'rxjs';
+import { combineLatest, filter, map, Observable, of, pipe, tap, withLatestFrom } from 'rxjs';
 import { BOLHDR } from '../model/BOLHDR';
 import { ShipmentLTLState } from '../reducers';
 import { loadAllShipmentsLTL } from '../state/shipmentLTL.action';
-import { selectAllShipmentLTLs } from '../state/shipmentLTL.selector';
+import { selectAllShipmentLTLs, selectShipmentByClientID } from '../state/shipmentLTL.selector';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ApplicationStateService } from 'src/app/shared/applicationStateService';
-
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-lading-board',
   templateUrl: './lading-board.component.html',
   styleUrls: ['./lading-board.component.css']
 })
-export class LadingBoardComponent implements OnInit {
+export class LadingBoardComponent implements OnInit, OnDestroy{
 
-  public ShipmentLTLs$: Observable<BOLHDR[]> = of([])
+  private subSink = new SubSink();
+
+  public ShipmentLTLs$: Observable<BOLHDR[]> = of([]);
 
   displayedColumns: string[] = ['Edit', 'ClientLadingNo', 'ProNumber', 'Carrier', 'PickupDate', 'Shipper', 'Consignee', 'Status'];
   ShipmentLTLs = new MatTableDataSource<BOLHDR>();
   @ViewChild(MatPaginator) shipmentLTLpaginator: MatPaginator | any;
   @ViewChild(MatSort) shipmentLTLsort: MatSort | any;
   Selection = new SelectionModel<BOLHDR>(false, []);
-  
+  changedClientID: number = 0;
 
 
   constructor(private store: Store<ShipmentLTLState>,
     private router: Router,
     private route: ActivatedRoute,
     private applicationStateService: ApplicationStateService) {
-      
-     }
 
-  
+  }
+
+
   ngAfterViewInit() {
     this.ShipmentLTLs.paginator = this.shipmentLTLpaginator;
     this.ShipmentLTLs.sort = this.shipmentLTLsort;
@@ -45,17 +47,59 @@ export class LadingBoardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.applicationStateService.clientID$.subscribe(cli => {
-      //this.clientID = (cli === undefined ? 0 : cli)
-      if(cli !== undefined && cli !== 0){
-        this.store.dispatch(loadAllShipmentsLTL({clientID:cli=== undefined ? 0 : cli}))
+    //this.subSink.add(this.applicationStateService.clientID$);
+
+    this.applicationStateService.clientID$.subscribe(cli => {      
+      if (cli !== undefined && cli !== 0) {
+        this.changedClientID = cli;
+
+        this.ShipmentLTLs$ = this.store.pipe(
+          select(selectShipmentByClientID(cli)) 
+        )
+        //.pipe(map(a => {return a.filter(val => val.ClientId === cli)}))
+
+
+        this.ShipmentLTLs$.subscribe(bol => {
+          if (bol.length == 0) {
+            this.store.dispatch(loadAllShipmentsLTL({ clientID: cli }))
+          }
+        });
+
+        //this.store.dispatch(loadAllShipmentsLTL({ clientID: cli === undefined ? 0 : cli }))
       }
     });
-   
+
+    combineLatest([this.applicationStateService.clientID$, this.ShipmentLTLs$]).subscribe(a => this.changedClientID == a[0]);
+
+    this.ShipmentLTLs$.subscribe(bol => {
+      debugger
+      if (bol.length === 0 && this.changedClientID !== 0) {
+        this.store.dispatch(loadAllShipmentsLTL({ clientID: this.changedClientID === undefined ? 0 : this.changedClientID }))
+      }
+    });
+
+
+    // this.ShipmentLTLs$ = this.store.pipe(
+    //   //select(selectAllShipmentLTLs)
+    //   select(selectShipmentByClientID(this.changedClientID))
+    // )
+
+    // this.ShipmentLTLs$ = this.store.pipe(
+    //   select(selectAllShipmentLTLs) 
+    // )
+    // .pipe(withLatestFrom(this.applicationStateService.clientID$),
+    //  map(([a,b]) => {return a.filter(val => val.ClientId === b)}))
+
+    //this.store.dispatch(loadAllShipmentsLTL({clientID:cli=== undefined ? 0 : cli}))
+    // this.ShipmentLTLs$ = this.store.pipe(
+    //   select(selectAllShipmentLTLs)      
+    // )
 
     this.ShipmentLTLs$ = this.store.pipe(
-      select(selectAllShipmentLTLs)
+      select(selectShipmentByClientID(this.changedClientID)) 
     )
+
+
 
     this.ShipmentLTLs$.subscribe(a => {
       this.ShipmentLTLs.data = a;
@@ -134,6 +178,10 @@ export class LadingBoardComponent implements OnInit {
       return '';
     }
 
+  }
+
+  ngOnDestroy() {
+    this.subSink.unsubscribe();
   }
 
 }

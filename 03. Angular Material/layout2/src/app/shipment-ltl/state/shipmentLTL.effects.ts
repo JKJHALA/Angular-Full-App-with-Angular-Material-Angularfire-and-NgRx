@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { concatMap, map, noop } from "rxjs";
+import { concatMap, filter, map, noop } from "rxjs";
 import { LadingService } from "../services/ladingService";
 import { ShipmentLTLActions } from "./action-types";
 import { allShipmentsLTLLoaded, loadAllShipmentsLTL } from "./shipmentLTL.action";
@@ -17,7 +17,7 @@ export class ShipmentLTLEffects{
 
       loadProducts$ = createEffect(() => {
         return this.actions$.pipe(
-           ofType(ShipmentLTLActions.loadAllShipmentsLTL),
+           ofType(ShipmentLTLActions.loadAllShipmentsLTL),           
            concatMap((action)=>{return this.ladingService.GetPagedBOLHDRsFromOpenStatusPublic(action.clientID)}),
            map((bolhdrs)=>allShipmentsLTLLoaded({bolhdrs}))
            /** An EMPTY observable only emits completion. Replace with your own observable stream */
