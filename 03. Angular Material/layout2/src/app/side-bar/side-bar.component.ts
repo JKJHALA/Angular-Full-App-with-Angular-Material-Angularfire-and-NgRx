@@ -7,6 +7,7 @@ import { combineLatest, debounceTime, distinctUntilChanged, filter, map, Observa
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApplicationStateService } from '../shared/applicationStateService';
 import { LoadApplicationMenu, LoadBrandInfo, LoadClientAndSubClientByFilterString, LoadClientDefault, LoadCorporateClientDefault, LoadLoggedClientDetail } from '../auth/state/auth.actions';
+import { filteredClients } from '../auth/state/auth.selectors';
 
 
 @Component({
@@ -65,9 +66,21 @@ export class SideBarComponent implements OnInit {
   }
 
   private getClientAndSubClientsByFilterName(searchText: string) {
-    this.store.dispatch(
-      LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 })
-    );
+
+    this.applicationStateService.filteredClientAndSubClient$ = this.store
+            .pipe(
+                select(filteredClients)
+            )
+            .pipe(map(a => {return a.filter((val:ClientMasterMiniModel)=> val.ClientName?.startsWith(searchText))}));
+
+            this.applicationStateService.filteredClientAndSubClient$.subscribe(cli => {
+              if (cli.length == 0) {
+                this.store.dispatch(LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 }));
+              }
+            })
+            .unsubscribe();
+
+    // this.store.dispatch(LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 }));
   }
 
 

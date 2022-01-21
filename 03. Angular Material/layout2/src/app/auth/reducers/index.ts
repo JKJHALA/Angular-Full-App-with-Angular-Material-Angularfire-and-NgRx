@@ -12,15 +12,30 @@ import {
 import { environment } from '../../../environments/environment';
 import { AuthActions } from '../state/action-types';
 import { UserProfile } from '../Model/userProfile';
-import { ClientMasterMiniModel } from '../Model/ClientMasterMiniModel';
+import { ClientMasterMiniModel, compareClients } from '../Model/ClientMasterMiniModel';
 import { BrandInfoModel } from '../Model/BrandInfoModel';
 import { ClientDefaultsModel } from '../Model/ClientDefaultsModel';
 import { state } from '@angular/animations';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { adapter } from 'src/app/shipment-ltl/reducers';
 import { ApplicationMenuModel } from '../Model/ApplicationMenuModel';
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
 export const authFeatureKey = 'auth';
+
+export interface LoadFilteredClientsState extends EntityState<ClientMasterMiniModel>{
+  isClientandSubClientLoaded: boolean
+
+  }
+
+export const LoadFilteredClientsadapter=createEntityAdapter<ClientMasterMiniModel>({
+  selectId: (clients:ClientMasterMiniModel)=>clients.ClientID?clients.ClientID:0,
+  sortComparer: compareClients
+ })
+
+ export const inititalLoadFilteredClientsState=adapter.getInitialState(
+  {isClientandSubClientLoaded:false}
+)
 
 export interface AuthState {
   userProfile: UserProfile;
@@ -92,9 +107,15 @@ export const authReducer = createReducer(
   }),
   on(AuthActions.ApplicationMenuLoaded,(state,action) => {    
     return{...state, applicationMenus : action.applicationMenus,isApplicationMenuLoaded:true}
-  }),
+  })
 )
+  // on(AuthActions.ClientAndSubClientByFilterStringLoaded,
+  //   (state,action) => adapter.addMany(
+  //     action.filteredClients,
+  //     {  ...state, ,isClientandSubClientLoaded:true}
+  // )),
 
+ 
 export const{
   selectAll
 } =adapter.getSelectors();

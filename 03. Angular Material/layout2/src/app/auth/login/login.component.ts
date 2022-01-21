@@ -18,7 +18,7 @@ import { clientID } from '../state/auth.selectors';
 
 export class LoginComponent implements OnInit {
 
-
+  hide = true;
   loginFG = new FormGroup({
     loginName: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),

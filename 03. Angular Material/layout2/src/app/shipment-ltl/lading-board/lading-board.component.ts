@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild,OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { combineLatest, filter, map, Observable, of, pipe, tap, withLatestFrom } from 'rxjs';
+import { combineLatest, filter, map, Observable, of, pairwise, pipe, tap, withLatestFrom } from 'rxjs';
 import { BOLHDR } from '../model/BOLHDR';
 import { ShipmentLTLState } from '../reducers';
 import { loadAllShipmentsLTL } from '../state/shipmentLTL.action';
@@ -11,7 +11,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ApplicationStateService } from 'src/app/shared/applicationStateService';
-import { SubSink } from 'subsink';
+import { SubSink } from 'subsink/dist/subsink';
+
 
 @Component({
   selector: 'app-lading-board',
@@ -47,9 +48,23 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
 
-    //this.subSink.add(this.applicationStateService.clientID$);
+//     this.subSink.add(combineLatest([
+//       this.applicationStateService.clientID$,
+//       this.ShipmentLTLs$.pipe(pairwise),
+//     ]).pipe(
+//       map((o) => {
+//         return {a:o[0]};
+//       }),
+//       tap((o) => {
+// if(o[0] != 0[1])
+// {
 
-    this.applicationStateService.clientID$.subscribe(cli => {      
+// }
+//       })
+//     )
+//     );
+
+    this.subSink.add(this.applicationStateService.clientID$.subscribe(cli => {      
       if (cli !== undefined && cli !== 0) {
         this.changedClientID = cli;
 
@@ -63,26 +78,25 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
           if (bol.length == 0) {
             this.store.dispatch(loadAllShipmentsLTL({ clientID: cli }))
           }
-        });
+        })
+        .unsubscribe();
 
-        //this.store.dispatch(loadAllShipmentsLTL({ clientID: cli === undefined ? 0 : cli }))
       }
-    });
+    })
+    );
 
-    combineLatest([this.applicationStateService.clientID$, this.ShipmentLTLs$]).subscribe(a => this.changedClientID == a[0]);
+    
 
-    this.ShipmentLTLs$.subscribe(bol => {
-      debugger
-      if (bol.length === 0 && this.changedClientID !== 0) {
-        this.store.dispatch(loadAllShipmentsLTL({ clientID: this.changedClientID === undefined ? 0 : this.changedClientID }))
-      }
-    });
+    // combineLatest([this.applicationStateService.clientID$, this.ShipmentLTLs$]).subscribe(a => this.changedClientID == a[0]);
+
+    // this.ShipmentLTLs$.subscribe(bol => {
+    //   debugger
+    //   if (bol.length === 0 && this.changedClientID !== 0) {
+    //     this.store.dispatch(loadAllShipmentsLTL({ clientID: this.changedClientID === undefined ? 0 : this.changedClientID }))
+    //   }
+    // });
 
 
-    // this.ShipmentLTLs$ = this.store.pipe(
-    //   //select(selectAllShipmentLTLs)
-    //   select(selectShipmentByClientID(this.changedClientID))
-    // )
 
     // this.ShipmentLTLs$ = this.store.pipe(
     //   select(selectAllShipmentLTLs) 
@@ -90,15 +104,11 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
     // .pipe(withLatestFrom(this.applicationStateService.clientID$),
     //  map(([a,b]) => {return a.filter(val => val.ClientId === b)}))
 
-    //this.store.dispatch(loadAllShipmentsLTL({clientID:cli=== undefined ? 0 : cli}))
-    // this.ShipmentLTLs$ = this.store.pipe(
-    //   select(selectAllShipmentLTLs)      
-    // )
 
     this.ShipmentLTLs$ = this.store.pipe(
-      select(selectAllShipmentLTLs) 
+      select(selectShipmentByClientID) 
     )
-    .pipe(map(a => {return a.filter(val => val.ClientId === this.changedClientID)}))
+    
 
 
     this.ShipmentLTLs$.subscribe(a => {
