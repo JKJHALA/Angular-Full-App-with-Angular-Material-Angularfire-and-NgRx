@@ -9,6 +9,7 @@ import { RatingComponent } from './home/rating/rating.component';
 import { LadingBoardComponent } from './shipment-ltl/lading-board/lading-board.component';
 import { LadingBoardTLComponent } from './shipment-tl/lading-board-tl/lading-board-tl.component';
 import { ProductComponent } from './product/products/product.component';
+import { ProductContainerComponent } from './product/product-container/product-container.component';
 import { LocationComponent } from './location/locations/location.component';
 import { LocationEntryPanelComponent } from './location/location-entry-panel/location-entry-panel.component';
 import { ReportsComponent } from './report/reports/reports.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'location', component: LocationComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'locationEntryPanel', component: LocationEntryPanelComponent },
-  { path: 'productEntryPanel', component: ProductEntryPanelComponent }
+  { path: 'productEntryPanel', component: ProductContainerComponent },
+  { path: 'productEntryPanel/:ProductId', component: ProductContainerComponent }
 ];
 
 @NgModule({

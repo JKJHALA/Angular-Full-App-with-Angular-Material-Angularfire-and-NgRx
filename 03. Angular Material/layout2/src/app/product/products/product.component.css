@@ -13,3 +13,17 @@ table {
 .mat-row .mat-cell {
   font-size: 12px;
 }
+
+.mat-row .mat-cell {
+    font-size: 12px;
+}
+
+mat-toolbar
+{
+    height: 50px;
+}
+
+mat-paginator
+{
+    height: 45px;
+}

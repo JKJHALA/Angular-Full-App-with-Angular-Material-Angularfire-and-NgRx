@@ -1,8 +1,15 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { ApplicationStateService } from 'src/app/shared/applicationStateService';
+import { Product } from '../Model/Product';
+import { ProductState } from '../reducers';
+import { loadAllProducts } from '../state/product.action';
+import { selectAllProducts } from '../state/product.selector';
 
 @Component({
   selector: 'app-product',
@@ -10,57 +17,63 @@ import {Router} from '@angular/router';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  
-  displayedColumns: string[] = ['Edit','Description', 'Active', 'Class', 'Hazmat','NMFC','Weight','Group'];
 
-  products = new MatTableDataSource<ProductModel>(ELEMENT_DATA);
+  displayedColumns: string[] = ['Edit', 'Description', 'Active', 'Class', 'Hazmat', 'NMFC', 'Weight', 'Group'];
+  products = new MatTableDataSource<Product>();
+  public products$: Observable<Product[]> = of([])
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | any;
-  @ViewChild(MatSort) sort: MatSort | any;
-  selectedRowIndex:string | undefined;
+  @ViewChild(MatPaginator) productPaginator: MatPaginator | any;
+  @ViewChild(MatSort) productSort: MatSort | any;
+  selectedRowIndex: Product | undefined;
+  clientID: number;
 
   ngAfterViewInit() {
-    this.products.paginator = this.paginator;
-    this.products.sort = this.sort;
+    this.products.paginator = this.productPaginator;
+    this.products.sort = this.productSort;
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private store: Store<ProductState>
+    , private applicationStateService: ApplicationStateService) {
+    this.clientID = 0;
+  }
 
   ngOnInit(): void {
+    this.applicationStateService.clientID$.subscribe(cli => {
+      this.clientID = (cli === undefined ? 0 : cli)
+    });
+
+    this.store.dispatch(loadAllProducts({ clientID: this.clientID }))
+
+    this.products$ = this.store.pipe(
+      select(selectAllProducts)
+    );
+
+    this.products$.subscribe(p => {
+      this.products.data = p;
+      this.products.paginator = this.productPaginator;
+      this.products.sort = this.productSort;
+    })
   }
 
-  AddProductClick()
-  {
-    this.router.navigateByUrl('/productEntryPanel');   
-  }  
+  EditProduct(selectedProduct: Product) {
+    this.SelectData(selectedProduct);
+    if (this.selectedRowIndex != null && this.selectedRowIndex != undefined) {
+      this.router.navigate(['/productEntryPanel', this.selectedRowIndex.ProductID], {
+        relativeTo: this.route,
+      });
+    }
+  }
 
-  SelectData(selectedProduct:ProductModel)
-  {
-    this.selectedRowIndex=selectedProduct.Description;    
+  SelectData(selectedProduct: Product) {
+    this.selectedRowIndex = selectedProduct;
+  }
+
+  AddProductClick() {
+    this.router.navigate(['/productEntryPanel'], {
+      relativeTo: this.route,
+    });
   }
 
 }
-
-export interface ProductModel {
-  Description: string,
-  Active: boolean,
-  Class: string,
-  Hazmat: boolean,
-  NMFC: string,
-  Weight: number,
-  Group: string
-}
-
-const ELEMENT_DATA: ProductModel[] = [
-  { Description: 'PRODUCT LINE 1', Active: true, Class: '50', Hazmat: false, NMFC: '123456-78', Weight: 500, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 2', Active: false, Class: '55', Hazmat: true, NMFC: '123456-78', Weight: 600, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 3', Active: true, Class: '60', Hazmat: false, NMFC: '123456-78', Weight: 700, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 4', Active: false, Class: '65', Hazmat: true, NMFC: '123456-78', Weight: 800, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 5', Active: true, Class: '70', Hazmat: false, NMFC: '123456-78', Weight: 900, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 6', Active: false, Class: '77', Hazmat: true, NMFC: '123456-78', Weight: 1000, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 7', Active: true, Class: '85', Hazmat: false, NMFC: '123456-78', Weight: 1100, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 8', Active: false, Class: '92', Hazmat: true, NMFC: '123456-78', Weight: 1200, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 9', Active: true, Class: '100', Hazmat: false, NMFC: '123456-78', Weight: 1300, Group: 'STANDARD' },
-  { Description: 'PRODUCT LINE 10', Active: false, Class: '110', Hazmat: true, NMFC: '123456-78', Weight: 1400, Group: 'STANDARD' },
-];
-
