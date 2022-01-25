@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, filter, map, Observable, of, pairwise, pipe, tap, withLatestFrom } from 'rxjs';
@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ApplicationStateService } from 'src/app/shared/applicationStateService';
 import { SubSink } from 'subsink/dist/subsink';
+import { MatSidenav } from '@angular/material/sidenav';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { SubSink } from 'subsink/dist/subsink';
   templateUrl: './lading-board.component.html',
   styleUrls: ['./lading-board.component.css']
 })
-export class LadingBoardComponent implements OnInit, OnDestroy{
+export class LadingBoardComponent implements OnInit, OnDestroy {
 
   private subSink = new SubSink();
 
@@ -31,7 +32,7 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
   @ViewChild(MatSort) shipmentLTLsort: MatSort | any;
   Selection = new SelectionModel<BOLHDR>(false, []);
   changedClientID: number = 0;
-
+  @ViewChild('searchModal') sidenav: MatSidenav | any;
 
   constructor(private store: Store<ShipmentLTLState>,
     private router: Router,
@@ -48,30 +49,30 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
 
-//     this.subSink.add(combineLatest([
-//       this.applicationStateService.clientID$,
-//       this.ShipmentLTLs$.pipe(pairwise),
-//     ]).pipe(
-//       map((o) => {
-//         return {a:o[0]};
-//       }),
-//       tap((o) => {
-// if(o[0] != 0[1])
-// {
+    //     this.subSink.add(combineLatest([
+    //       this.applicationStateService.clientID$,
+    //       this.ShipmentLTLs$.pipe(pairwise),
+    //     ]).pipe(
+    //       map((o) => {
+    //         return {a:o[0]};
+    //       }),
+    //       tap((o) => {
+    // if(o[0] != 0[1])
+    // {
 
-// }
-//       })
-//     )
-//     );
+    // }
+    //       })
+    //     )
+    //     );
 
-    this.subSink.add(this.applicationStateService.clientID$.subscribe(cli => {      
+    this.subSink.add(this.applicationStateService.clientID$.subscribe(cli => {
       if (cli !== undefined && cli !== 0) {
         this.changedClientID = cli;
 
         this.ShipmentLTLs$ = this.store.pipe(
-          select(selectAllShipmentLTLs) 
+          select(selectAllShipmentLTLs)
         )
-        .pipe(map(a => {return a.filter(val => val.ClientId === cli)}))
+          .pipe(map(a => { return a.filter(val => val.ClientId === cli) }))
 
 
         this.ShipmentLTLs$.subscribe(bol => {
@@ -79,13 +80,13 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
             this.store.dispatch(loadAllShipmentsLTL({ clientID: cli }))
           }
         })
-        .unsubscribe();
+          .unsubscribe();
 
       }
     })
     );
 
-    
+
 
     // combineLatest([this.applicationStateService.clientID$, this.ShipmentLTLs$]).subscribe(a => this.changedClientID == a[0]);
 
@@ -106,9 +107,9 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
 
 
     this.ShipmentLTLs$ = this.store.pipe(
-      select(selectShipmentByClientID) 
+      select(selectShipmentByClientID)
     )
-    
+
 
 
     this.ShipmentLTLs$.subscribe(a => {
@@ -187,6 +188,36 @@ export class LadingBoardComponent implements OnInit, OnDestroy{
     else {
       return '';
     }
+
+  }
+
+  // SearchModal Open/Close
+  openCloseSearchbar(reason: string) {
+    if (reason === 'open' || reason === 'search') {
+      this.sidenav.open();
+    }
+    else {
+      this.sidenav.close();
+    }
+  }
+
+  validateCollectionStatus(event: any, code: number) {
+  }
+
+  clearSearchbar() {
+    if(this.sidenav.mode == "over")
+    this.sidenav.close('close');
+  }
+
+  searchShipmentLTL() {
+    if (this.sidenav.mode == "over")
+    {
+      this.sidenav.close('close');
+    }
+    
+  }
+
+  prepareSearchShipmentLTLDto() {
 
   }
 

@@ -7,7 +7,9 @@ import { ClientDefaultsModel } from "../auth/Model/ClientDefaultsModel";
 import { ClientMasterMiniModel } from "../auth/Model/ClientMasterMiniModel";
 import { UserProfile } from "../auth/Model/userProfile";
 import { AuthState } from "../auth/reducers";
-import {  applicationMenus, brandInfo, clientDefaults, clientID, corporateClientDefaults, filteredClients, isLoggedIn, loggeduserID, selectedClient, userName, userTicket } from "../auth/state/auth.selectors";
+import {  applicationMenus, brandInfo, clientDefaults, clientID, corporateClientDefaults, isLoggedIn, LoggedClientID, loggeduserID, selectedClient, userName, userTicket } from "../auth/state/auth.selectors";
+import { ClientMasterMiniState } from "../client/reducers";
+import { filteredClients } from "../client/state/clientMasterMini.selector";
 
 @Injectable()
 export class ApplicationStateService {
@@ -17,6 +19,7 @@ export class ApplicationStateService {
     public isLoggedIn$: Observable<boolean> = of();
     public userTicket$: Observable<string | undefined> = of();
     public clientID$: Observable<number | undefined> = of();
+    public loggedClientID$ : Observable<number | undefined> = of();
 
     public selectedClient$: Observable<ClientMasterMiniModel> = of();
     public brandInfo$: Observable<BrandInfoModel[]> = of();
@@ -25,13 +28,14 @@ export class ApplicationStateService {
     public filteredClientAndSubClient$: Observable<ClientMasterMiniModel[]> = of();
     public applicationMenus$: Observable<ApplicationMenuModel[]> = of();
 
-    constructor(private store: Store<AuthState>) {
+    constructor(private store: Store<AuthState>,private clientMasterMiniStore:Store<ClientMasterMiniState>) {
 
         this.userID$ = this.store.pipe(select(loggeduserID));
         this.username$ = this.store.pipe(select(userName));
         this.isLoggedIn$ = this.store.pipe(select(isLoggedIn));
         this.userTicket$ = this.store.pipe(select(userTicket));
         this.clientID$ = this.store.pipe(select(clientID));
+        this.loggedClientID$ = this.store.pipe(select(LoggedClientID));
 
         this.selectedClient$ = this.store
             .pipe(
@@ -59,7 +63,7 @@ export class ApplicationStateService {
             );
 
 
-        this.filteredClientAndSubClient$ = this.store
+        this.filteredClientAndSubClient$ = this.clientMasterMiniStore
             .pipe(
                 select(filteredClients)
             );

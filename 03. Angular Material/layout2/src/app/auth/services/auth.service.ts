@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 //import { AppModule } from 'app/app.module';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.prod';
 import { ApplicationMenuModel } from '../Model/ApplicationMenuModel';
 import { BrandInfoModel } from '../Model/BrandInfoModel';
 import { ClientDefaultsModel } from '../Model/ClientDefaultsModel';
@@ -14,7 +15,7 @@ import { clientID, userName } from '../state/auth.selectors';
 
 @Injectable()
 export class AuthenticationService {
-  domainUrl: string = "https://devcustomer.tmssaas.com/";
+  domainUrl: string = environment.baseEndpoint;
   // domainUrl: string = "http://localhost:1352/";
   constructor(private http: HttpClient) { }
 
@@ -110,21 +111,21 @@ export class AuthenticationService {
         }))
   }
 
-  public getClientAndSubClientByFilterString(filterClientName:string,clientID:number,userID:number):Observable<ClientMasterMiniModel[]>
-  {
-    const url = this.domainUrl + '/Services/Wcf/ClientMasterService.svc/json/GetClientAndSubClientByFilterString'
-    const options = { 'filterClientName': filterClientName, 'clientID': clientID, 'userID': userID };
+  // public getClientAndSubClientByFilterString(filterClientName:string,clientID:number,userID:number):Observable<ClientMasterMiniModel[]>
+  // {
+  //   const url = this.domainUrl + '/Services/Wcf/ClientMasterService.svc/json/GetClientAndSubClientByFilterString'
+  //   const options = { 'filterClientName': filterClientName, 'clientID': clientID, 'userID': userID };
 
-    return this.http.post<ClientMasterMiniModel[]>(url, options, { observe: 'response' })
-    .pipe(
-      map((x: any) => {
-        let fliteredClientResult: ClientMasterMiniModel[];
+  //   return this.http.post<ClientMasterMiniModel[]>(url, options, { observe: 'response' })
+  //   .pipe(
+  //     map((x: any) => {
+  //       let fliteredClientResult: ClientMasterMiniModel[];
         
-        fliteredClientResult = x.body.GetClientAndSubClientByFilterStringResult ;
+  //       fliteredClientResult = x.body.GetClientAndSubClientByFilterStringResult ;
         
-        return fliteredClientResult;
-      }))
-  }
+  //       return fliteredClientResult;
+  //     }))
+  // }
 
   public getApplicationMenus(UserID : number,clientID:number):Observable<ApplicationMenuModel[]>
   {

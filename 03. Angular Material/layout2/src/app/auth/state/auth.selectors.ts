@@ -62,10 +62,10 @@ export const corporateClientDefaults=createSelector(
   (auth) => auth.CorporateClientDefaults
 );
 
-export const filteredClients = createSelector(
-  selectAuthState,
-  (auth)=>auth.clientAndSubclients
-);
+// export const filteredClients = createSelector(
+//   selectAuthState,
+//   (auth)=>auth.clientAndSubclients
+// );
 
 export const applicationMenus=createSelector(
   selectAuthState,  

@@ -1,83 +1,218 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" fxAlign="stretch" fxFlex="1 1 auto">
 
-    <div fxLayout="row">
-        <mat-toolbar>
-          <div fxFlex fxLayoutAlign="start start" fxLayoutGap="10px">
-            <button mat-mini-fab color="Basic" matTooltip="Add Shipment">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button mat-mini-fab color="Basic" matTooltip="Delete Shipment">
-              <mat-icon>delete_outline</mat-icon>
-            </button>
-          </div>
-          <div fxLayoutAlign="end end">
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons
-              aria-label="Select page of periodic elements">
-            </mat-paginator>
-          </div>
-        </mat-toolbar>
+  <div fxLayout="row">
+    <mat-toolbar>
+      <div fxFlex fxLayoutAlign="start start" fxLayoutGap="10px">
+        <button mat-mini-fab color="Basic" matTooltip="Add Shipment">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-mini-fab color="Basic" matTooltip="Delete Shipment">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
       </div>
+      <div fxLayoutAlign="end end">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons
+          aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+    </mat-toolbar>
+  </div>
 
-    <div fxFlex fxLayout="row">
-        <table mat-table [dataSource]="ShipmentLTLs" fxFlex  matSort>
+  <div fxLayout="row" fxLayoutAlign="end end">
 
-            <ng-container matColumnDef="Edit">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"><button mat-mini-fab color="Basic">
-                        <mat-icon>create</mat-icon>
-                    </button> </td>
-            </ng-container>
-
-            <ng-container matColumnDef="ClientLadingNo">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Load Number</th>
-                <td mat-cell *matCellDef="let element">{{element.ClientLadingNo}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="ProNumber">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Pro Number</th>
-                <td mat-cell *matCellDef="let element">{{element.ProNumber}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="Carrier">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Carrier</th>
-                <td mat-cell *matCellDef="let element">{{element.CarrierName}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="PickupDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Pickup Date</th>
-                <td mat-cell *matCellDef="let element">{{ ConverteJsonDateToLocalTimeZone(element.PickupDate) }}</td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="Shipper">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Shipper</th>
-                <td mat-cell *matCellDef="let element">
-                    <div>{{element.OrgName}}</div>
-                    <div>{{element.OriginCityStatePostal}}</div>
-                </td>
-                
-            </ng-container>
-
-            <ng-container matColumnDef="Consignee">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Consignee</th>
-                <td mat-cell *matCellDef="let element">
-                    <div>{{element.DestName}}</div>
-                    <div>{{element.DestinationCityStatePostal}}</div>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="Status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-                <td mat-cell *matCellDef="let element">{{element.BolStatusName}}</td>
-            </ng-container>
-
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
-
-        </table>
+    <div fxLayoutAlign="end baseline">
+      <button (click)="openCloseSearchbar('open')" class="moreFilterButton" mat-button>
+        <span>Advance Filter Options </span>
+        <mat-icon color="black">filter_list</mat-icon>
+      </button>
     </div>
+
+    <mat-sidenav #searchModal class="search-container" style="z-index: 200;" (click)="openCloseSearchbar('search')">
+      
+          <div class="ml-2 mr-2">
+              <mat-form-field appearance="outline">
+                  <mat-label>Origin Name</mat-label>
+                  <input matInput placeholder="">
+              </mat-form-field>
+          </div>
+          <div class="ml-2 mr-2">
+              <mat-form-field appearance="outline">
+                  <mat-label>Destination Name</mat-label>
+                  <input matInput placeholder="">
+              </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutGap="5px" class="ml-2 mr-2">
+              <div fxFlex="130px">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Ship Date</mat-label>
+                      <input (click)="shipdatefromDatepickerRef.open()" (focus)="shipdatefromDatepickerRef.open()" name="shipdatefrom"
+                          [matDatepicker]="shipdatefromDatepickerRef" matInput readonly>
+                      <mat-datepicker-toggle [for]="shipdatefromDatepickerRef" matSuffix></mat-datepicker-toggle>
+                      <mat-datepicker #shipdatefromDatepickerRef></mat-datepicker>
+                  </mat-form-field>
+              </div>
+              <div fxFlex="120px">
+                  <mat-form-field appearance="outline">
+                      <mat-label>To</mat-label>
+                      <input (click)="shipdatetoDatepickerRef.open()" (focus)="shipdatetoDatepickerRef.open()" name="shipdateto"
+                      [matDatepicker]="shipdatetoDatepickerRef" matInput readonly>
+                      <mat-datepicker-toggle [for]="shipdatetoDatepickerRef" matSuffix></mat-datepicker-toggle>
+                      <mat-datepicker #shipdatetoDatepickerRef></mat-datepicker>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div fxLayout="row" fxLayoutGap="5px" class="ml-2 mr-2">
+              <div fxFlex="130px">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Delivery Date</mat-label>
+                      <input (click)="deliverydatefromDatepickerRef.open()" (focus)="deliverydatefromDatepickerRef.open()" name="deliverydatefrom"
+                          [matDatepicker]="deliverydatefromDatepickerRef" matInput readonly>
+                      <mat-datepicker-toggle [for]="deliverydatefromDatepickerRef" matSuffix></mat-datepicker-toggle>
+                      <mat-datepicker #deliverydatefromDatepickerRef></mat-datepicker>
+                  </mat-form-field>
+              </div>
+              <div fxFlex="120px">
+                  <mat-form-field appearance="outline">
+                      <mat-label>To</mat-label>
+                      <input (click)="deliverydatetoDatepickerRef.open()" (focus)="deliverydatetoDatepickerRef.open()" name="deliverydateto"
+                      [matDatepicker]="deliverydatetoDatepickerRef" matInput readonly>
+                      <mat-datepicker-toggle [for]="deliverydatetoDatepickerRef" matSuffix></mat-datepicker-toggle>
+                      <mat-datepicker #deliverydatetoDatepickerRef></mat-datepicker>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="ml-2 mr-2">
+              <mat-form-field appearance="outline">
+                  <mat-label>PO Number</mat-label>
+                  <input matInput placeholder="">
+              </mat-form-field>
+          </div>
+          <div class="ml-2 mr-2">
+              <mat-form-field appearance="outline">
+                  <mat-label>BOL Number</mat-label>
+                  <input matInput placeholder="">
+              </mat-form-field>
+          </div>
+          <div class="ml-2 mr-2">
+              <mat-form-field appearance="outline">
+                  <mat-label>Pro Number</mat-label>
+                  <input matInput placeholder="">
+              </mat-form-field>
+          </div>          
+              <div class="ml-2 mr-2">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Search in Client Lading No/PO Number/Carrier BC</mat-label>
+                      <input matInput placeholder="">
+                  </mat-form-field>
+              </div> 
+              <div class="ml-2 mr-2">
+                  <mat-accordion>
+                      <mat-expansion-panel class="origin-services-expansion-panel"  
+                          >
+                          <mat-expansion-panel-header [collapsedHeight]="'32px'" [expandedHeight]="'32px'" class="expansion-panel-header-style">
+                              <mat-panel-title>
+                                  Select Status
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                  <!-- {{statusSelectedDescription}} -->
+                              </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <div class="expansion-panel-body-style flex flex-col items-baseline">
+                              <div class="pt-1" fxLayout.lt-xs="column" fxLayout.gt-xs="row">
+                                  <mat-checkbox [checked]="false" color="warn" (change)="validateCollectionStatus($event,10)" value=10>Pending</mat-checkbox>
+                              </div>
+                              <div class="pt-1" fxLayout.lt-xs="column" fxLayout.gt-xs="row">
+                                  <mat-checkbox [checked]="false" color="warn" (change)="validateCollectionStatus($event,2)" value=2>Booked</mat-checkbox>    
+                              </div>
+                              <div class="pt-1" fxLayout.lt-xs="column" fxLayout.gt-xs="row">
+                                  <mat-checkbox [checked]="false" color="warn" (change)="validateCollectionStatus($event,15)" value=15>Dispatched</mat-checkbox>    
+                              </div>
+                              <div class="pt-1" fxLayout.lt-xs="column" fxLayout.gt-xs="row">
+                                  <mat-checkbox [checked]="false" color="warn" (change)="validateCollectionStatus($event,1)" value=1>In Transit</mat-checkbox>    
+                              </div>
+                              <div class="pt-1" fxLayout.lt-xs="column" fxLayout.gt-xs="row">
+                                  <mat-checkbox [checked]="false" color="warn" (change)="validateCollectionStatus($event,9)" value=9>Out For Delivery</mat-checkbox>    
+                              </div>
+                              <div class="pt-1" fxLayout.lt-xs="column" fxLayout.gt-xs="row">
+                                  <mat-checkbox [checked]="false" color="warn" (change)="validateCollectionStatus($event,6)" value=6>Delivered</mat-checkbox>    
+                              </div>
+                          </div>
+                      </mat-expansion-panel>
+                  </mat-accordion>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px" class="py-5 pr-2">
+                  <div>
+                      <button mat-button (click)="clearSearchbar" type="button">Clear</button>
+                      <button color="warn" (click)="searchShipmentLTL" mat-raised-button type="button">Search</button>
+                  </div>
+              </div>   
+
+          
+
+    </mat-sidenav>
+  </div>
+
+  <div fxFlex fxLayout="row">
+    <table mat-table [dataSource]="ShipmentLTLs" fxFlex matSort>
+
+      <ng-container matColumnDef="Edit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"><button mat-mini-fab color="Basic">
+            <mat-icon>create</mat-icon>
+          </button> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ClientLadingNo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Load Number</th>
+        <td mat-cell *matCellDef="let element">{{element.ClientLadingNo}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ProNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Pro Number</th>
+        <td mat-cell *matCellDef="let element">{{element.ProNumber}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Carrier">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Carrier</th>
+        <td mat-cell *matCellDef="let element">{{element.CarrierName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="PickupDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Pickup Date</th>
+        <td mat-cell *matCellDef="let element">{{ ConverteJsonDateToLocalTimeZone(element.PickupDate) }}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Shipper">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Shipper</th>
+        <td mat-cell *matCellDef="let element">
+          <div>{{element.OrgName}}</div>
+          <div>{{element.OriginCityStatePostal}}</div>
+        </td>
+
+      </ng-container>
+
+      <ng-container matColumnDef="Consignee">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Consignee</th>
+        <td mat-cell *matCellDef="let element">
+          <div>{{element.DestName}}</div>
+          <div>{{element.DestinationCityStatePostal}}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">{{element.BolStatusName}}</td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+
+    </table>
+  </div>
 
 </div>

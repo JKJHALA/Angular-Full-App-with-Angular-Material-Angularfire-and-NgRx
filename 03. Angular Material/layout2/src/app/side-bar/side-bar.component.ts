@@ -2,12 +2,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthState } from '../auth/reducers';
 import { MaterialModule } from '../material.module';
-import { ClientMasterMiniModel } from '../auth/Model/ClientMasterMiniModel';
 import { combineLatest, debounceTime, distinctUntilChanged, filter, map, Observable, of, pipe, startWith, switchMap, tap } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApplicationStateService } from '../shared/applicationStateService';
-import { LoadApplicationMenu, LoadBrandInfo, LoadClientAndSubClientByFilterString, LoadClientDefault, LoadCorporateClientDefault, LoadLoggedClientDetail } from '../auth/state/auth.actions';
-import { filteredClients } from '../auth/state/auth.selectors';
+import { LoadApplicationMenu, LoadBrandInfo, LoadClientDefault, LoadCorporateClientDefault, LoadLoggedClientDetail } from '../auth/state/auth.actions';
+// import { filteredClients } from '../auth/state/auth.selectors';
+import { ClientMasterMiniState } from '../client/reducers';
+import { filteredClients } from '../client/state/clientMasterMini.selector';
+import { LoadClientAndSubClientByFilterString } from '../client/state/clientMasterMini.action';
+import { ClientMasterMiniModel } from '../client/model/ClientMasterMiniModel';
 
 
 @Component({
@@ -19,40 +22,38 @@ import { filteredClients } from '../auth/state/auth.selectors';
 export class SideBarComponent implements OnInit {
   @Output() sidenavOutput: EventEmitter<string> = new EventEmitter();
 
-  selectedClient$: Observable<string | undefined> = of('');
-  filteredOptions$: Observable<ClientMasterMiniModel[]> = of();
-  clientsForUser$: Observable<ClientMasterMiniModel[]> = of();
+  //selectedClient$: Observable<string | undefined> = of('');
+  //filteredOptions$: Observable<ClientMasterMiniModel[]> = of();
+  //clientsForUser$: Observable<ClientMasterMiniModel[]> = of();
   userID: number = 0;
-
+  loggedClientID = 0;
+  loadedClients$: Observable<ClientMasterMiniModel[]> = of();
 
   clientsForm = new FormGroup({
     client: new FormControl('', null)
   })
 
-  constructor(private store: Store<AuthState>, private fb: FormBuilder, public applicationStateService: ApplicationStateService) {
+  constructor(private store: Store<AuthState>, private clientMasterMiniStore: Store<ClientMasterMiniState>, private fb: FormBuilder, public applicationStateService: ApplicationStateService) {
 
   }
 
   ngOnInit(): void {
 
-    // this.selectedClient$ = this.store
-    //   .pipe(
-    //     select(selectedClient)
-    //   );
-
-    // this.store.pipe(
-    //   select(selectedClient)
-    // ).subscribe(client => {
-    //   if (!!client) this.clientsForm.get('client')?.setValue(client.ClientName)      
-    // });
-
     this.applicationStateService.selectedClient$.subscribe(client => {
-      if (!!client) this.clientsForm.get('client')?.setValue(client.ClientName)
+      if (!!client) {
+        this.clientsForm.get('client')?.setValue(client.ClientName)
+      }
     })
+
+    this.applicationStateService.loggedClientID$.subscribe(cli => {
+      if (!!cli) {
+        this.loggedClientID = cli === undefined ? 0 : cli
+      }
+    }).unsubscribe();
 
     this.applicationStateService.userID$.subscribe(usr => {
       if (!!usr) this.userID = usr
-    })
+    }).unsubscribe();
 
     this.clientsForm.get('client')?.valueChanges.pipe(
       startWith(''),
@@ -67,20 +68,34 @@ export class SideBarComponent implements OnInit {
 
   private getClientAndSubClientsByFilterName(searchText: string) {
 
-    this.applicationStateService.filteredClientAndSubClient$ = this.store
-            .pipe(
-                select(filteredClients)
-            )
-            .pipe(map(a => {return a.filter((val:ClientMasterMiniModel)=> val.ClientName?.startsWith(searchText))}));
 
-            this.applicationStateService.filteredClientAndSubClient$.subscribe(cli => {
-              if (cli.length == 0) {
-                this.store.dispatch(LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 }));
-              }
-            })
-            .unsubscribe();
+    this.loadedClients$ = this.clientMasterMiniStore
+      .pipe(
+        select(filteredClients)
+      )
+      .pipe(map(a => { return a.filter((val: ClientMasterMiniModel) => val.ClientName?.toUpperCase()!.startsWith(searchText.toUpperCase())) }));
 
-    // this.store.dispatch(LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 }));
+
+    this.loadedClients$.subscribe(cli => {
+      if (cli.length === 0) {
+        this.clientMasterMiniStore.dispatch(LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: this.loggedClientID, userID: this.userID }));
+      }
+    }).unsubscribe();
+
+    // this.applicationStateService.filteredClientAndSubClient$ = this.clientMasterMiniStore
+    //   .pipe(
+    //     select(filteredClients)
+    //   )
+    //   .pipe(map(a => { return a.filter((val: ClientMasterMiniModel) => val.ClientName?.startsWith(searchText)) }));
+
+
+    // this.applicationStateService.filteredClientAndSubClient$.subscribe(cli => {
+    //   if (cli.length == 0) {
+    //     this.clientMasterMiniStore.dispatch(LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 }));
+    //   }
+    // }).unsubscribe();
+
+    //this.clientMasterMiniStore.dispatch(LoadClientAndSubClientByFilterString({ filterClientName: searchText, clientID: 1, userID: 1 }));
   }
 
 

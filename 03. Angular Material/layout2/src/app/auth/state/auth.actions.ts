@@ -60,9 +60,9 @@ props<{ applicationMenus:ApplicationMenuModel[]}>()
 );
 
 //Load Clients by Filter String
-export const LoadClientAndSubClientByFilterString = createAction('[Sidebar Component] Filtered Client Load', 
-props<{filterClientName:string,clientID:number,userID:number}>());
+// export const LoadClientAndSubClientByFilterString = createAction('[Sidebar Component] Filtered Client Load', 
+// props<{filterClientName:string,clientID:number,userID:number}>());
 
-export const ClientAndSubClientByFilterStringLoaded = createAction('[Sidebar Component] Filtered Client Loaded',
-props<{ filteredClients:ClientMasterMiniModel[]}>()
-);
+// export const ClientAndSubClientByFilterStringLoaded = createAction('[Sidebar Component] Filtered Client Loaded',
+// props<{ filteredClients:ClientMasterMiniModel[]}>()
+// );

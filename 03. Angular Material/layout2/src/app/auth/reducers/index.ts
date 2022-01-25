@@ -102,18 +102,13 @@ export const authReducer = createReducer(
   on(AuthActions.CorporateClientDefaultLoaded, (state, action) => {
     return { ...state, CorporateClientDefaults: action.corporateClientDefaultsModel, IsCorporateDefaultsLoaded: true }
   }),
-  on(AuthActions.ClientAndSubClientByFilterStringLoaded,(state,action) => {    
-    return{...state, clientAndSubclients : action.filteredClients,isClientandSubClientLoaded:true}
-  }),
+  // on(AuthActions.ClientAndSubClientByFilterStringLoaded,(state,action) => {    
+  //   return{...state, clientAndSubclients : action.filteredClients ,isClientandSubClientLoaded:true}
+  // }),
   on(AuthActions.ApplicationMenuLoaded,(state,action) => {    
     return{...state, applicationMenus : action.applicationMenus,isApplicationMenuLoaded:true}
   })
 )
-  // on(AuthActions.ClientAndSubClientByFilterStringLoaded,
-  //   (state,action) => adapter.addMany(
-  //     action.filteredClients,
-  //     {  ...state, ,isClientandSubClientLoaded:true}
-  // )),
 
  
 export const{

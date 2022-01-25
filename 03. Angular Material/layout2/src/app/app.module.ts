@@ -26,6 +26,8 @@ import { HttpClient, HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common
 import { AuthenticationService } from './auth/services/auth.service';
 import { AuthInterceptor } from './system-service/auth-interceptor';
 import { ApplicationStateService } from './shared/applicationStateService';
+import { ClientMasterMiniService } from './client/services/clientMasterMini.service';
+import { clientModule } from './client/client.module';
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { ApplicationStateService } from './shared/applicationStateService';
     ProductModule,
     LocationModule,
     ReportModule,
+    clientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     //EntityDataModule.forRoot({}),
@@ -63,6 +66,7 @@ import { ApplicationStateService } from './shared/applicationStateService';
     HttpClient,
     AuthenticationService,
     ApplicationStateService,
+    ClientMasterMiniService,
 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
 

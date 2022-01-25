@@ -4,7 +4,7 @@ import { select } from "@ngrx/store";
 import { concatMap, map, Observable, of } from "rxjs";
 import { AuthenticationService } from "../services/auth.service";
 import { AuthActions } from "./action-types";
-import { ApplicationMenuLoaded, BrandInfoLoaded, ClientAndSubClientByFilterStringLoaded, ClientDefaultLoaded, CorporateClientDefaultLoaded, LoggedClientDetailLoaded } from "./auth.actions";
+import { ApplicationMenuLoaded, BrandInfoLoaded, ClientDefaultLoaded, CorporateClientDefaultLoaded, LoggedClientDetailLoaded } from "./auth.actions";
 
 
 @Injectable()
@@ -51,15 +51,15 @@ export class authEffects {
         );
     });
 
-    loadClientAndSubClientByFilterName$ = createEffect(() => {
+    // loadClientAndSubClientByFilterName$ = createEffect(() => {
         
-        return this.actions$.pipe(
-            ofType(AuthActions.LoadClientAndSubClientByFilterString),
-            concatMap((action) => { return this.authService.getClientAndSubClientByFilterString(action.filterClientName, action.clientID, action.userID) }),
+    //     return this.actions$.pipe(
+    //         ofType(AuthActions.LoadClientAndSubClientByFilterString),
+    //         concatMap((action) => { return this.authService.getClientAndSubClientByFilterString(action.filterClientName, action.clientID, action.userID) }),
             
-            map((filteredClients) => ClientAndSubClientByFilterStringLoaded({ filteredClients }))
-        );
-    });
+    //         map((filteredClients) => ClientAndSubClientByFilterStringLoaded({ filteredClients }))
+    //     );
+    // });
 
     loadApplicationMenus$ = createEffect(() =>{
         return this.actions$.pipe(

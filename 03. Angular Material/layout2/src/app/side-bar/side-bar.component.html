@@ -5,13 +5,20 @@
         <input name="client" formControlName="client" type="text" matInput placeholder="Client Name"
           style="color: #a1a2b6;" [matAutocomplete]="clientAutoComplete">
         <mat-autocomplete #clientAutoComplete="matAutocomplete">          
-            <mat-option
+            <!-- <mat-option
               *ngFor="let client1 of (applicationStateService.filteredClientAndSubClient$ | async) || []; let filterClient"
               (onSelectionChange)="onChangeClient(client1)" 
               [value]="client1?.ClientName" 
               style="font-size: 12px">
               {{client1?.ClientName}}
-            </mat-option>
+            </mat-option> -->
+            <mat-option
+            *ngFor="let client1 of (loadedClients$ | async) || []; let filterClient"
+            (onSelectionChange)="onChangeClient(client1)" 
+            [value]="client1?.ClientName" 
+            style="font-size: 12px">
+            {{client1?.ClientName}}
+          </mat-option>
         </mat-autocomplete>
       </mat-form-field>
     </form>
